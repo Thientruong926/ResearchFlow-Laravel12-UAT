@@ -1,0 +1,13 @@
+{
+  "created_on": "2026-10-17",
+  "artifact_kind": "source-code Laravel 12 prototype, not installed/running application",
+  "php_lint_checked_files": 41,
+  "php_lint_errors": [],
+  "blade_templates": 20,
+  "defined_named_routes": 46,
+  "undefined_route_names_used_in_code": {},
+  "requirements_tracked": 25,
+  "runtime_tests_executed": false,
+  "reason_runtime_tests_not_run": "Composer not installed and network DNS unavailable; PHP environment lacks PDO SQLite/other PHP extensions. Run composer install and php artisan test on target machine.",
+  "production_certified": false
+}

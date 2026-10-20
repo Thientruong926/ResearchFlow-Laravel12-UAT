@@ -1,0 +1,8 @@
+/vendor
+/.env
+/node_modules
+/storage/logs/*.log
+/storage/app/private/*
+!/storage/app/private/.gitkeep
+/database/*.sqlite
+/bootstrap/cache/*.php

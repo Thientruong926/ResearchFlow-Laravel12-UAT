@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-19",
+  "php_lint": {
+    "status": "PASS",
+    "files": 55,
+    "errors": []
+  },
+  "blade_route_names": {
+    "status": "PASS",
+    "declared_count": 60,
+    "referenced_count": 59,
+    "missing": []
+  },
+  "javascript_inline": {
+    "status": "PASS",
+    "checked": 2,
+    "errors": []
+  },
+  "original_source_documents": {
+    "status": "PASS",
+    "missing": []
+  },
+  "packaging_sensitive_filenames": {
+    "status": "PASS",
+    "files": []
+  },
+  "composer_phpunit": {
+    "status": "NOT_RUN",
+    "reason": "Composer and project vendor/required PDO SQLite, mbstring and zip extensions not available in this offline container"
+  },
+  "db_migration_mysql": {
+    "status": "NOT_RUN"
+  },
+  "browser_ua_sp_ssp": {
+    "status": "NOT_RUN"
+  },
+  "research_go_live": {
+    "status": "BLOCKED",
+    "reason": "Pending approved instruments/protocol, verified UAT, security testing, hosting setup and real SPSS import"
+  }
+}

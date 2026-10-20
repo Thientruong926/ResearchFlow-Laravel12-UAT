@@ -1,0 +1,35 @@
+{
+  "built_on": "2026-10-18",
+  "php_syntax": {
+    "status": "PASS",
+    "files": 46
+  },
+  "js_parse": {
+    "status": "PASS",
+    "scope": "autosave script only"
+  },
+  "route_name_mapping": {
+    "status": "PASS",
+    "route_names": 51,
+    "blade_references": 50
+  },
+  "spss_syntax_smoke": {
+    "status": "PASS",
+    "scope": "string formatting, NOT verified inside IBM SPSS"
+  },
+  "source_requirements": {
+    "status": "PASS",
+    "documents": 5
+  },
+  "phpunit_runtime": {
+    "status": "NOT_RUN",
+    "reason": "Runtime has no Composer, Laravel dependencies, PDO SQLite/MySQL and required PHP extensions"
+  },
+  "browser_uat": {
+    "status": "NOT_RUN"
+  },
+  "production_readiness": {
+    "status": "BLOCKED",
+    "see": "docs/RELEASE_READINESS.md"
+  }
+}
