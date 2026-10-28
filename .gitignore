@@ -4,5 +4,8 @@
 /storage/logs/*.log
 /storage/app/private/*
 !/storage/app/private/.gitkeep
+/storage/app/research-settings.json
+/storage/framework/views/*.php
+/.phpunit.result.cache
 /database/*.sqlite
 /bootstrap/cache/*.php

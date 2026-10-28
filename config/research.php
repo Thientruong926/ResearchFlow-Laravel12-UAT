@@ -1,9 +1,33 @@
 <?php
+
 return [
- 'minor_flow' => (bool) env('RESEARCH_MINOR_FLOW', false),
- 'collection_open' => (bool) env('RESEARCH_COLLECTION_OPEN', false),
- 'audio_approved' => (bool) env('RESEARCH_AUDIO_APPROVED', false),
- 'dashboard_min_cell' => max(2,(int) env('RESEARCH_DASHBOARD_MIN_CELL',5)),
- 'schedule_snapshots' => (bool) env('RESEARCH_SCHEDULE_SNAPSHOTS', false),
- 'groups' => ['manager'=>'Cán bộ quản lý', 'lecturer'=>'Giảng viên', 'student'=>'Sinh viên'],
+    'google_sync_enabled' => (bool) env('GOOGLE_SYNC_ENABLED', false),
+    'admin' => [
+        'email' => env('ADMIN_EMAIL', 'admin@example.test'),
+        'password' => env('ADMIN_PASSWORD', ''),
+    ],
+    'settings_file' => storage_path('app/research-settings.json'),
+    'groups' => [
+        'manager' => 'Cán bộ quản lý',
+        'lecturer' => 'Giảng viên',
+        'student' => 'Sinh viên',
+    ],
+    'default_settings' => [
+        'research' => [
+            'title' => 'Khảo sát ứng dụng công nghệ số trong dạy học',
+            'introduction' => 'Khảo sát phục vụ nghiên cứu về hoạt động ứng dụng công nghệ số trong dạy học cho sinh viên ngành Giáo dục mầm non tại các trường đại học ở Thành phố Hồ Chí Minh.',
+            'contact_name' => 'Nhóm nghiên cứu',
+            'contact_email' => 'research@example.test',
+            'consent' => 'Việc tham gia hoàn toàn tự nguyện. Không nhập họ tên, mã số sinh viên, số điện thoại hoặc thông tin nhận dạng cá nhân.',
+        ],
+        'schools' => [
+            ['code' => 'SITE_01', 'name' => 'Trường đại học minh họa 01', 'targets' => ['manager' => 10, 'lecturer' => 30, 'student' => 100]],
+        ],
+        'assignments' => [],
+        'sheet_columns' => [
+            'timestamp' => 'Dấu thời gian',
+            'school' => 'Mã trường',
+            'group' => 'Nhóm đối tượng',
+        ],
+    ],
 ];

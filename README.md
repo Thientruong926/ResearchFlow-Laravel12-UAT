@@ -1,3 +1,5 @@
+> **Tài liệu áp dụng cho phiên bản mới:** xem `README_GOOGLE.md`. Phiên bản đang chạy dùng Google Forms/Google Sheets và không dùng database. Nội dung MySQL bên dưới là tài liệu của kiến trúc cũ, chỉ giữ lại để đối chiếu.
+
 > **Trạng thái bàn giao (2026-10-18):** bản kỹ thuật v0.2.0 phục vụ kiểm thử/pilot. Chưa xác nhận hoàn thành 100% nghiệm thu nghiên cứu thực tế. Xem `docs/RELEASE_READINESS.md` và `docs/INSTALL_PRODUCTION_WINDOWS.md`. Giữ các cờ thu thập, dưới 18 tuổi và âm thanh ở `false` khi chưa có phê duyệt.
 
 # ResearchFlow — Laravel 12, cổng nghiên cứu tích hợp A–E

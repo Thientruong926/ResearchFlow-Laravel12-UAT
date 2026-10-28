@@ -1,5 +1,7 @@
 # Hướng dẫn khởi chạy ResearchFlow trên Windows
 
+> **Lưu ý:** hướng dẫn đang áp dụng nằm trong `README_GOOGLE.md`. Phiên bản mới không cần MySQL, không chạy `migrate`/`db:seed`; phần bên dưới là tài liệu cài đặt kiến trúc cũ.
+
 **Đây là gói mã nguồn Laravel 12; cần Composer tải `vendor/` trước khi chạy, và chưa được nghiệm thu production.**
 
 ## Chuẩn bị

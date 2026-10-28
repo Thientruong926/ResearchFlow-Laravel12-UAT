@@ -1,5 +1,5 @@
 {
-  "name": "researchflow/research-platform", "type": "project", "description": "Ethics-first research workflow for 5 IT workstreams",
+  "name": "researchflow/google-survey-portal", "type": "project", "description": "Laravel survey portal synchronized with Google Forms and Google Sheets without a response database",
   "license": "MIT", "require": {
     "php": "^8.2",
     "endroid/qr-code": "^5.0",
