@@ -15,3 +15,7 @@
 /.phpunit.result.cache
 /storage/framework/views/*.php
 /storage/framework/testing/
+
+# Tài liệu kế hoạch nội bộ — không đưa lên repo
+docs/KE_HOACH_QUAN_LY_MUC_4_6.md
+docs/SPRINT_*.md
