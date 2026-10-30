@@ -6,6 +6,14 @@ use PHPUnit\Framework\TestCase;
 
 class SpssSyntaxTest extends TestCase
 {
+    public function test_design_missing_codes_are_declared_as_missing_not_scale_scores(): void
+    {
+        $q=(object)['survey_id'=>1,'code'=>'SV_NT01','type'=>'likert','label'=>'Demo','variable_label'=>'Demo',
+            'choices'=>'{"1":"One","97":"Unknown","98":"Not applicable"}','missing_code'=>'97,98,BLANK'];
+        $s=SpssSyntax::build(['Q1_SV_NT01'],[$q]);
+        self::assertStringContainsString('MISSING VALUES Q1_SV_NT01 (97,98).',$s);
+        self::assertStringNotContainsString('(97,98,BLANK)',$s);
+    }
     public function test_numeric_likert_and_number_import_as_numeric_with_labels():void
     {
         $q=(object)['survey_id'=>7,'code'=>'Q1','type'=>'likert','label'=>'Giá trị','variable_label'=>'Giá trị',

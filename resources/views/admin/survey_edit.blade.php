@@ -32,6 +32,14 @@
     @endif
     @if ($survey->status === 'draft')
         <div class="card">
+            <h2>Bộ phiếu và mã phiên bản</h2>
+            <form method="POST" action="{{ route('admin.survey.metadata', $survey->id) }}">@csrf
+                <label>Bộ phiếu</label><select name="instrument_id"><option @selected($survey->instrument_id === 'OBS2')>OBS2</option><option @selected($survey->instrument_id === 'OBS4')>OBS4</option></select>
+                <label>Mã phiên bản mới</label><input name="form_version" value="{{ $survey->form_version }}" required maxlength="64">
+                <button>Lưu metadata bản nháp</button>
+            </form>
+        </div>
+        <div class="card">
             <h2>Thêm câu hỏi (chỉ cho phiên bản nháp)</h2>
             <form method="POST" action="{{ route('admin.survey.question.add', $survey->id) }}">@csrf<div class="grid">
                     <div><label>Mã biến (ASCII, không khoảng trắng)</label><input name="code" required placeholder="Q01"></div>

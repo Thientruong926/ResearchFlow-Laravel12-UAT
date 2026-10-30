@@ -61,7 +61,10 @@ class SpssSyntax
             }
             if ($q->missing_code !== null && $q->missing_code !== '') {
                 $code = (string)$q->missing_code;
-                if (!$numeric[$name]) $script .= "MISSING VALUES $name ('".str_replace("'", "''",$code)."').\n";
+                if ($code === '97,98,BLANK' && $numeric[$name]) {
+                    $script .= "MISSING VALUES $name (97,98).\n* Empty cells import as system missing; BLANK is explicit in the long raw export.\n";
+                }
+                elseif (!$numeric[$name]) $script .= "MISSING VALUES $name ('".str_replace("'", "''",$code)."').\n";
                 elseif (preg_match('/^-?[0-9]+(?:\.[0-9]+)?$/D',$code)) $script .= "MISSING VALUES $name ($code).\n";
                 else $script .= "* NOTE: nonnumeric missing code for numeric $name requires scientific review.\n";
             }

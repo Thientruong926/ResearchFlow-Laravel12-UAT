@@ -5,7 +5,7 @@ class QualityService {
  public function evaluate(int $sessionId): void {
   $session=DB::table('survey_sessions')->find($sessionId);if(!$session||$session->status!=='complete')return;
   $qs=DB::table('questions')->where('survey_id',$session->survey_id)->get();$as=DB::table('answers')->where('survey_session_id',$sessionId)->get()->keyBy('question_id');
-  $values=[];$missing=0;$eligible=0;$byCode=[];foreach($qs as $q){$cond=json_decode($q->condition??'null',true);$visible=!$cond||($byCode[$cond['code']]??null)===$cond['equals'];if(!$visible){$byCode[$q->code]=null;continue;}$eligible++;$raw=$as->get($q->id)?->value;$val=$raw?json_decode($raw,true):null;$byCode[$q->code]=$val;if($val===null||$val==='')$missing++;if($q->type==='likert'&&$val!==null)$values[]=(string)$val;}
+  $values=[];$missing=0;$eligible=0;$byCode=[];foreach($qs as $q){$cond=json_decode($q->condition??'null',true);$visible=!$cond||($byCode[$cond['code']]??null)===$cond['equals'];if(!$visible){$byCode[$q->code]=null;continue;}$eligible++;$raw=$as->get($q->id)?->value;$val=$raw?json_decode($raw,true):null;$byCode[$q->code]=$val;if($val===null||$val===''||$as->get($q->id)?->missing_code!==null)$missing++;if($q->type==='likert'&&$val!==null&&$as->get($q->id)?->missing_code===null)$values[]=(string)$val;}
   $rules=DB::table('quality_rules')->where('status','approved')->get();
   foreach($rules as $rule) {
    $flag=false;$evidence='';$threshold=(float)$rule->threshold;
@@ -26,6 +26,7 @@ class QualityService {
   }
  }
  public function reusedToken(int $sessionId):void {
+   app(TechnicalDuplicates::class)->flag($sessionId,'SESSION_REPLAY','completed_session:'.$sessionId);
    $rule=DB::table('quality_rules')->where('status','approved')->where('code','duplicate_token')->first();
    if($rule)DB::table('quality_flags')->updateOrInsert(['survey_session_id'=>$sessionId,'quality_rule_id'=>$rule->id],['evidence'=>'Repeated submission attempt for same resume token; not proof of duplicate person','updated_at'=>now(),'created_at'=>now()]);
  }

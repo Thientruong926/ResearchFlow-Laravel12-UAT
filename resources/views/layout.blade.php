@@ -281,11 +281,17 @@
 <body>
     <header>
         <div class="wrap"><strong><a href="{{ route('home') }}">◈ ResearchFlow</a></strong>
-            <nav><a href="{{ route('home') }}">Trang chủ</a>@auth<a href="{{ route('admin.dashboard') }}">Tổng quan</a><a href="{{ route('admin.sites') }}">Điểm
-                        mẫu</a><a href="{{ route('admin.quota') }}">Quota</a><a href="{{ route('admin.surveys') }}">Khảo sát</a><a
-                        href="{{ route('admin.information') }}">Thông tin/Consent</a><a href="{{ route('qc.index') }}">QC</a><a
-                        href="{{ route('data.index') }}">Data/SPSS</a><a href="{{ route('admin.requests') }}">Yêu cầu</a><a
-                        href="{{ route('admin.users') }}">Người dùng</a>
+            <nav><a href="{{ route('home') }}">Trang chủ</a>@auth<a href="{{ route('admin.dashboard') }}">Tổng quan</a>
+                    @if(auth()->user()->hasRole('owner','researcher','NCS','IT_ADMIN'))<a href="{{ route('admin.sites') }}">Điểm mẫu</a>@endif
+                    @if(auth()->user()->hasRole('owner','researcher','quota_manager'))<a href="{{ route('admin.quota') }}">Quota</a>@endif
+                    @if(auth()->user()->hasRole('owner','researcher','NCS'))<a href="{{ route('admin.surveys') }}">Khảo sát</a><a href="{{ route('admin.information') }}">Thông tin/Consent</a><a href="{{ route('admin.requests') }}">Yêu cầu</a>@endif
+                    @if(auth()->user()->hasRole('owner','researcher','qc_reviewer'))<a href="{{ route('qc.index') }}">QC</a>@endif
+                    @if(auth()->user()->hasRole('owner','researcher','qc_reviewer','NCS'))<a href="{{ route('admin.integrity') }}">Cờ trùng kỹ thuật</a>@endif
+                    @if(auth()->user()->hasRole('owner','researcher','data_manager'))<a href="{{ route('data.index') }}">Data/SPSS</a>@endif
+                    @if(auth()->user()->hasRole('ANALYST','NCS'))<a href="{{ route('data.long.raw') }}">Xuất dữ liệu nghiên cứu</a><a href="{{ route('data.research.codebook') }}">Codebook CSV</a>@endif
+                    @if(auth()->user()->hasRole('SITE_COORDINATOR'))<a href="{{ route('admin.site.status') }}">Điểm được phân công</a>@endif
+                    @if(auth()->user()->hasRole('owner','IT_ADMIN'))<a href="{{ route('admin.users') }}">Người dùng</a>@endif
+                    @if(auth()->user()->hasRole('owner','researcher','NCS','IT_ADMIN','AUDITOR'))<a href="{{ route('admin.research.audit') }}">Nhật ký truy cập</a>@endif
                     <form method="POST" action="{{ route('logout') }}" style="display:inline">@csrf<button style="background:transparent;padding:0">Đăng
                     xuất</button></form>@else<a href="{{ route('login') }}">Đăng nhập</a>@endauth
         </nav>

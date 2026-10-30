@@ -1,0 +1,228 @@
+﻿instrument_id,form_version,item_code,group_code,construct_name,question_text,scale_code,source_ref,item_order
+OBS2,DEMO-0.1,BGH-NT01,BGH,Nhận thức,Tôi cho rằng ứng dụng CNS có vai trò quan trọng trong nâng cao chất lượng đào tạo ngành GDMN.,DY,S11/1,1
+OBS2,DEMO-0.1,BGH-NT02,BGH,Nhận thức,Tôi cho rằng phát triển hoạt động dạy học có ứng dụng CNS cần được ưu tiên trong định hướng phát triển nhà trường.,DY,S5/M7,2
+OBS2,DEMO-0.1,BGH-P01,BGH,Lập kế hoạch,Nhà trường đưa mục tiêu ứng dụng công nghệ số trong dạy học ngành Giáo dục Mầm non vào kế hoạch năm học.,TH,S5/M7,3
+OBS2,DEMO-0.1,BGH-P02,BGH,Lập kế hoạch,"Kế hoạch ứng dụng CNS được xây dựng trên cơ sở chính sách, quy định và chuẩn đầu ra của ngành GDMN.",TH,S1/B1,4
+OBS2,DEMO-0.1,BGH-P03,BGH,Lập kế hoạch,"Kế hoạch được xây dựng trên cơ sở đánh giá nhu cầu của khoa/ngành, giảng viên và sinh viên.",TH,S1/B1,5
+OBS2,DEMO-0.1,BGH-P04,BGH,Lập kế hoạch,Kế hoạch năm học xác định các chỉ tiêu đo lường được về ứng dụng công nghệ số trong dạy học ngành Giáo dục Mầm non.,TH,S1/B1,6
+OBS2,DEMO-0.1,BGH-P05,BGH,Lập kế hoạch,Kế hoạch xác định rõ đơn vị chịu trách nhiệm cho từng nhiệm vụ ứng dụng CNS.,TH,S11/1,7
+OBS2,DEMO-0.1,BGH-P06,BGH,Lập kế hoạch,Kế hoạch xác định kinh phí cần thiết để triển khai ứng dụng CNS trong dạy học.,TH,S2/B2,8
+OBS2,DEMO-0.1,BGH-P07,BGH,Lập kế hoạch,Kế hoạch xác định thời hạn hoàn thành từng nhiệm vụ ứng dụng CNS.,TH,S1/B1,9
+OBS2,DEMO-0.1,BGH-P08,BGH,Lập kế hoạch,Kế hoạch dự kiến phương án xử lý rủi ro khi triển khai ứng dụng CNS.,TH,S11/1,10
+OBS2,DEMO-0.1,BGH-D01,BGH,Tổ chức thực hiện,Nhà trường ban hành quy định và hướng dẫn triển khai ứng dụng CNS trong dạy học.,TH,S2/M2.3,11
+OBS2,DEMO-0.1,BGH-D02,BGH,Tổ chức thực hiện,"Trách nhiệm giữa ban giám hiệu, các phòng chức năng, khoa/ngành và bộ phận kỹ thuật được phân định rõ.",TH,S1/B2,12
+OBS2,DEMO-0.1,BGH-D03,BGH,Tổ chức thực hiện,Nhà trường cấp kinh phí cho hoạt động ứng dụng CNS theo kế hoạch đã phê duyệt.,TH,S2/B2,13
+OBS2,DEMO-0.1,BGH-D04,BGH,Tổ chức thực hiện,Nhà trường duy trì đường truyền Internet và mạng không dây ổn định để phục vụ dạy học có ứng dụng công nghệ số của ngành Giáo dục Mầm non.,TH,S2/M2.3,14
+OBS2,DEMO-0.1,BGH-D05,BGH,Tổ chức thực hiện,Nhà trường tổ chức bồi dưỡng cho giảng viên về thiết kế dạy học tích hợp công nghệ số phù hợp với ngành Giáo dục Mầm non.,TH,S4/M4.1.6,15
+OBS2,DEMO-0.1,BGH-D06,BGH,Tổ chức thực hiện,Nhà trường bố trí hỗ trợ kỹ thuật kịp thời trong quá trình giảng dạy và đánh giá trên môi trường số.,TH,S5/M7,16
+OBS2,DEMO-0.1,BGH-D07,BGH,Tổ chức thực hiện,"Nhà trường có cơ chế khuyến khích và công nhận sáng kiến dạy học, học liệu hoặc đánh giá số có chất lượng.",TH,S2/M2.3,17
+OBS2,DEMO-0.1,BGH-D08,BGH,Tổ chức thực hiện,Nhà trường phổ biến hướng dẫn bảo vệ dữ liệu cá nhân trong hoạt động dạy học số.,TH,S9/2,18
+OBS2,DEMO-0.1,BGH-D09,BGH,Tổ chức thực hiện,Nhà trường bố trí hệ thống quản lý học tập trực tuyến đáp ứng nhu cầu đào tạo ngành GDMN.,TH,S11/1,19
+OBS2,DEMO-0.1,BGH-D10,BGH,Tổ chức thực hiện,Nhà trường cung cấp quyền tiếp cận phần mềm cần thiết cho dạy học ngành GDMN.,TH,S2/M2.3,20
+OBS2,DEMO-0.1,BGH-D11,BGH,Tổ chức thực hiện,Nhà trường bố trí thiết bị đáp ứng hoạt động dạy học có ứng dụng CNS của ngành GDMN.,TH,S2/B2,21
+OBS2,DEMO-0.1,BGH-C01,BGH,Kiểm tra đánh giá,Nhà trường ban hành tiêu chí kiểm tra hoạt động ứng dụng CNS trong dạy học.,TH,S2/M2.3,22
+OBS2,DEMO-0.1,BGH-C02,BGH,Kiểm tra đánh giá,"Việc kiểm tra sử dụng nhiều nguồn minh chứng như đề cương học phần, học liệu, dự giờ, LMS và phản hồi người học.",TH,S11/1,23
+OBS2,DEMO-0.1,BGH-C03,BGH,Kiểm tra đánh giá,Nhà trường kiểm tra sự phù hợp giữa mục tiêu kế hoạch và kết quả triển khai thực tế.,TH,S1/B4,24
+OBS2,DEMO-0.1,BGH-C04,BGH,Kiểm tra đánh giá,Nhà trường đánh giá hiệu quả sử dụng các nguồn lực công nghệ phục vụ dạy học.,TH,S1/B4,25
+OBS2,DEMO-0.1,BGH-C05,BGH,Kiểm tra đánh giá,"Nhà trường sử dụng phản hồi của khoa, giảng viên và sinh viên để đánh giá kết quả ứng dụng công nghệ số trong dạy học.",TH,S1/B4,26
+OBS2,DEMO-0.1,BGH-C06,BGH,Kiểm tra đánh giá,Kết quả kiểm tra được tổng hợp thành dữ liệu phục vụ quyết định quản lý.,TH,S11/1,27
+OBS2,DEMO-0.1,BGH-A01,BGH,Cải tiến,Nhà trường giao trách nhiệm khắc phục những hạn chế được phát hiện sau kiểm tra.,TH,S11/1,28
+OBS2,DEMO-0.1,BGH-A02,BGH,Cải tiến,Nhà trường sử dụng kết quả kiểm tra và phản hồi để điều chỉnh kế hoạch ứng dụng công nghệ số trong dạy học.,TH,S1/B4,29
+OBS2,DEMO-0.1,BGH-A03,BGH,Cải tiến,"Các thực hành hiệu quả được tổng kết, chuẩn hóa và nhân rộng giữa các khoa/ngành.",TH,S11/1,30
+OBS2,DEMO-0.1,BGH-A04,BGH,Cải tiến,Nhà trường theo dõi việc hoàn thành các hành động cải tiến đã thống nhất.,TH,S11/1,31
+OBS2,DEMO-0.1,BGH-A05,BGH,Cải tiến,Nhà trường sử dụng kết quả đánh giá của năm học trước để lập kế hoạch ứng dụng công nghệ số cho năm học tiếp theo.,TH,S11/1,32
+OBS2,DEMO-0.1,BGH-A06,BGH,Cải tiến,Nhà trường điều chỉnh cơ chế khen thưởng hoặc hỗ trợ dựa trên kết quả đánh giá hoạt động ứng dụng CNS.,TH,S2/M2.3,33
+OBS2,DEMO-0.1,BGH-F01,BGH,Yếu tố ảnh hưởng,Năng lực lãnh đạo số của đội ngũ quản lý ảnh hưởng đến kết quả quản lý ứng dụng công nghệ số trong dạy học.,AH,S11/1,34
+OBS2,DEMO-0.1,BGH-F02,BGH,Yếu tố ảnh hưởng,Nguồn kinh phí dành cho ứng dụng CNS ảnh hưởng đến kết quả quản lý hoạt động.,AH,S11/1,35
+OBS2,DEMO-0.1,BGH-F03,BGH,Yếu tố ảnh hưởng,Các quy định về chuyển đổi số trong giáo dục ảnh hưởng đến việc quản lý ứng dụng công nghệ số trong dạy học tại trường.,AH,S11/1,36
+OBS2,DEMO-0.1,BGH-KK01,BGH,Khó khăn,Nhà trường gặp khó khăn khi bố trí kinh phí duy trì bản quyền phần mềm và bảo trì thiết bị số phục vụ dạy học ngành Giáo dục Mầm non.,KK,S11/1,37
+OBS2,DEMO-0.1,BGH-KK02,BGH,Khó khăn,"Nhà trường gặp khó khăn khi phối hợp giữa các phòng chức năng, bộ phận kỹ thuật và khoa trong triển khai dạy học số.",KK,S11/1,38
+OBS2,DEMO-0.1,BGH-KK03,BGH,Khó khăn,Nhà trường gặp khó khăn khi cụ thể hóa chính sách về ứng dụng CNS thành hướng dẫn thực hiện.,KK,S11/1,39
+OBS2,DEMO-0.1,KHOA-P01,KHOA,Lập kế hoạch,Khoa/ngành cụ thể hóa kế hoạch của trường thành kế hoạch phù hợp với chương trình đào tạo GDMN.,TH,S11/2,40
+OBS2,DEMO-0.1,KHOA-P02,KHOA,Lập kế hoạch,Kế hoạch của khoa xác định các học phần và hoạt động nghề nghiệp cần ưu tiên tích hợp CNS.,TH,S6/M4.3,41
+OBS2,DEMO-0.1,KHOA-P03,KHOA,Lập kế hoạch,"Khoa sử dụng thông tin về năng lực giảng viên, sinh viên và điều kiện thực tế khi lập kế hoạch.",TH,S1/B1,42
+OBS2,DEMO-0.1,KHOA-P04,KHOA,Lập kế hoạch,Giảng viên và bộ phận hỗ trợ được tham gia góp ý khi xây dựng kế hoạch.,TH,S11/2,43
+OBS2,DEMO-0.1,KHOA-P05,KHOA,Lập kế hoạch,Kế hoạch của khoa xác định sản phẩm số sinh viên cần hoàn thành trong các học phần thực hành nghề Giáo dục Mầm non.,TH,S11/2,44
+OBS2,DEMO-0.1,KHOA-D01,KHOA,Tổ chức thực hiện,Khoa phân công nhiệm vụ ứng dụng CNS phù hợp với năng lực của giảng viên.,TH,S11/2,45
+OBS2,DEMO-0.1,KHOA-D02,KHOA,Tổ chức thực hiện,Khoa hướng dẫn giảng viên đưa mục tiêu ứng dụng CNS vào đề cương và kế hoạch giảng dạy học phần.,TH,S6/M4.3,46
+OBS2,DEMO-0.1,KHOA-D03,KHOA,Tổ chức thực hiện,Khoa tổ chức thẩm định học liệu số trước khi đưa vào sử dụng trong đào tạo GDMN.,TH,S9/2,47
+OBS2,DEMO-0.1,KHOA-D04,KHOA,Tổ chức thực hiện,Khoa tổ chức sinh hoạt chuyên môn hoặc bồi dưỡng về thiết kế dạy học có tích hợp CNS.,TH,S6/M4.3,48
+OBS2,DEMO-0.1,KHOA-D05,KHOA,Tổ chức thực hiện,Khoa tổ chức cho giảng viên làm mẫu cách tích hợp công nghệ số trong các giờ dạy phương pháp giáo dục mầm non.,TH,S6/M4.3,49
+OBS2,DEMO-0.1,KHOA-D06,KHOA,Tổ chức thực hiện,Khoa tạo điều kiện cho giảng viên thử nghiệm bài dạy có ứng dụng CNS.,TH,S4/M4.1.6,50
+OBS2,DEMO-0.1,KHOA-D07,KHOA,Tổ chức thực hiện,Khoa phối hợp với phòng chức năng và bộ phận kỹ thuật để xử lý kịp thời khó khăn của giảng viên.,TH,S11/2,51
+OBS2,DEMO-0.1,KHOA-D08,KHOA,Tổ chức thực hiện,Khoa tổ chức cơ hội cho sinh viên thực hành dạy học có ứng dụng CNS.,TH,S4/M4.1,52
+OBS2,DEMO-0.1,KHOA-D09,KHOA,Tổ chức thực hiện,Khoa hướng dẫn việc bảo vệ dữ liệu của trẻ em khi sử dụng trong học tập và thực hành nghề.,TH,S10/M2.3,53
+OBS2,DEMO-0.1,KHOA-D10,KHOA,Tổ chức thực hiện,Khoa tổ chức chia sẻ học liệu số giữa các giảng viên.,TH,S9/2,54
+OBS2,DEMO-0.1,KHOA-D11,KHOA,Tổ chức thực hiện,Khoa chỉ đạo giảng viên hướng dẫn sinh viên tự thiết kế học liệu số phục vụ hoạt động giáo dục mầm non.,TH,S9/2,55
+OBS2,DEMO-0.1,KHOA-C01,KHOA,Kiểm tra đánh giá,Khoa có tiêu chí kiểm tra mức độ tích hợp CNS trong đề cương và kế hoạch dạy học.,TH,S11/2,56
+OBS2,DEMO-0.1,KHOA-C02,KHOA,Kiểm tra đánh giá,Khoa thực hiện dự giờ hoặc xem xét minh chứng dạy học có ứng dụng CNS.,TH,S2/M2.3,57
+OBS2,DEMO-0.1,KHOA-C03,KHOA,Kiểm tra đánh giá,"Khoa đánh giá sự phù hợp giữa công nghệ, mục tiêu, nội dung, phương pháp và kiểm tra đánh giá.",TH,S9/3,58
+OBS2,DEMO-0.1,KHOA-C04,KHOA,Kiểm tra đánh giá,Khoa sử dụng phản hồi của sinh viên để đánh giá chất lượng triển khai ứng dụng CNS.,TH,S1/B4,59
+OBS2,DEMO-0.1,KHOA-C05,KHOA,Kiểm tra đánh giá,Khoa kiểm tra chất lượng sản phẩm số của sinh viên phục vụ thực hành nghề GDMN.,TH,S10/M2.3,60
+OBS2,DEMO-0.1,KHOA-A01,KHOA,Cải tiến,Khoa phản hồi cụ thể cho giảng viên sau kiểm tra hoặc dự giờ.,TH,S2/M2.3,61
+OBS2,DEMO-0.1,KHOA-A02,KHOA,Cải tiến,Khoa điều chỉnh nội dung học phần dựa trên kết quả đánh giá việc tích hợp CNS.,TH,S11/2,62
+OBS2,DEMO-0.1,KHOA-A03,KHOA,Cải tiến,"Khoa đề xuất bổ sung hoặc phân bổ lại thiết bị, phần mềm và nguồn hỗ trợ theo nhu cầu thực tế.",TH,S1/B4,63
+OBS2,DEMO-0.1,KHOA-A04,KHOA,Cải tiến,Khoa phổ biến các thực hành dạy học số hiệu quả đã được tổng kết trong các tổ bộ môn.,TH,S11/2,64
+OBS2,DEMO-0.1,KHOA-A05,KHOA,Cải tiến,Khoa theo dõi kết quả thực hiện các kiến nghị cải tiến.,TH,S11/2,65
+OBS2,DEMO-0.1,KHOA-A06,KHOA,Cải tiến,Khoa tư vấn cho giảng viên điều chỉnh phương pháp dạy học có ứng dụng CNS sau kiểm tra.,TH,S11/2,66
+OBS2,DEMO-0.1,KHOA-DK01,KHOA,Điều kiện,Trang thiết bị tại các phòng học thực hành mầm non đáp ứng yêu cầu tổ chức dạy học có ứng dụng công nghệ số.,DY,S11/2,67
+OBS2,DEMO-0.1,KHOA-KK01,KHOA,Khó khăn,Khoa gặp khó khăn khi xây dựng kho học liệu số phù hợp với chương trình đào tạo ngành Giáo dục Mầm non.,KK,S11/2,68
+OBS2,DEMO-0.1,KHOA-F01,KHOA,Yếu tố ảnh hưởng,Năng lực số của giảng viên ảnh hưởng đến kết quả triển khai ứng dụng CNS.,AH,S11/2,69
+OBS2,DEMO-0.1,KHOA-F02,KHOA,Yếu tố ảnh hưởng,Trang thiết bị tại phòng học thực hành mầm non ảnh hưởng đến kết quả triển khai ứng dụng CNS.,AH,S11/2,70
+OBS2,DEMO-0.1,KHOA-F03,KHOA,Yếu tố ảnh hưởng,Thời lượng dành cho thực hành ứng dụng CNS trong chương trình ảnh hưởng đến kết quả triển khai.,AH,S11/2,71
+OBS2,DEMO-0.1,KHOA-F04,KHOA,Yếu tố ảnh hưởng,"Sự phối hợp giữa khoa, phòng chức năng và bộ phận kỹ thuật ảnh hưởng đến kết quả quản lý.",AH,S11/2,72
+OBS2,DEMO-0.1,KHOA-F05,KHOA,Yếu tố ảnh hưởng,Đặc điểm phát triển của trẻ mầm non ảnh hưởng đến việc khoa chỉ đạo lựa chọn công nghệ cho các học phần thực hành nghề.,AH,S11/2,73
+OBS4,DEMO-0.1,BGH-NT01,BGH,Nhận thức,Tôi cho rằng ứng dụng CNS có vai trò quan trọng trong nâng cao chất lượng đào tạo ngành GDMN.,DY,S11/1,1
+OBS4,DEMO-0.1,BGH-NT02,BGH,Nhận thức,Tôi cho rằng phát triển hoạt động dạy học có ứng dụng CNS cần được ưu tiên trong định hướng phát triển nhà trường.,DY,S5/M7,2
+OBS4,DEMO-0.1,BGH-P01,BGH,Plan,Nhà trường xác định ứng dụng CNS trong dạy học cho SV ngành GDMN là một nội dung trong chiến lược phát triển nhà trường.,TH,S5/M7,3
+OBS4,DEMO-0.1,BGH-P02,BGH,Plan,"Kế hoạch ứng dụng CNS được xây dựng trên cơ sở chính sách, quy định và chuẩn đầu ra của ngành GDMN.",TH,S1/B1,4
+OBS4,DEMO-0.1,BGH-P03,BGH,Plan,"Kế hoạch được xây dựng trên cơ sở đánh giá nhu cầu của khoa/ngành, giảng viên và sinh viên.",TH,S1/B1,5
+OBS4,DEMO-0.1,BGH-P04,BGH,Plan,Kế hoạch xác định mục tiêu và chỉ tiêu có thể đo lường đối với hoạt động dạy học có ứng dụng CNS.,TH,S1/B1,6
+OBS4,DEMO-0.1,BGH-P05,BGH,Plan,Kế hoạch xác định rõ đơn vị chịu trách nhiệm cho từng nhiệm vụ ứng dụng CNS.,TH,S11/1,7
+OBS4,DEMO-0.1,BGH-P06,BGH,Plan,Kế hoạch xác định kinh phí cần thiết để triển khai ứng dụng CNS trong dạy học.,TH,S2/B2,8
+OBS4,DEMO-0.1,BGH-P07,BGH,Plan,Kế hoạch xác định thời hạn hoàn thành từng nhiệm vụ ứng dụng CNS.,TH,S1/B1,9
+OBS4,DEMO-0.1,BGH-P08,BGH,Plan,Kế hoạch dự kiến phương án xử lý rủi ro khi triển khai ứng dụng CNS.,TH,S11/1,10
+OBS4,DEMO-0.1,BGH-D01,BGH,Do,Nhà trường ban hành quy định và hướng dẫn triển khai ứng dụng CNS trong dạy học.,TH,S2/M2.3,11
+OBS4,DEMO-0.1,BGH-D02,BGH,Do,"Trách nhiệm giữa ban giám hiệu, các phòng chức năng, khoa/ngành và bộ phận kỹ thuật được phân định rõ.",TH,S1/B2,12
+OBS4,DEMO-0.1,BGH-D03,BGH,Do,Nhà trường cấp kinh phí cho hoạt động ứng dụng CNS theo kế hoạch đã phê duyệt.,TH,S2/B2,13
+OBS4,DEMO-0.1,BGH-D04,BGH,Do,Nhà trường bảo đảm kết nối mạng phục vụ dạy học có ứng dụng CNS của ngành GDMN.,TH,S2/M2.3,14
+OBS4,DEMO-0.1,BGH-D05,BGH,Do,"Nhà trường tổ chức bồi dưỡng giảng viên về tích hợp CNS với phương pháp dạy học, không chỉ thao tác công cụ.",TH,S4/M4.1.6,15
+OBS4,DEMO-0.1,BGH-D06,BGH,Do,Nhà trường bố trí hỗ trợ kỹ thuật kịp thời trong quá trình giảng dạy và đánh giá trên môi trường số.,TH,S5/M7,16
+OBS4,DEMO-0.1,BGH-D07,BGH,Do,"Nhà trường có cơ chế khuyến khích và công nhận sáng kiến dạy học, học liệu hoặc đánh giá số có chất lượng.",TH,S2/M2.3,17
+OBS4,DEMO-0.1,BGH-D08,BGH,Do,Nhà trường phổ biến hướng dẫn bảo vệ dữ liệu cá nhân trong hoạt động dạy học số.,TH,S9/2,18
+OBS4,DEMO-0.1,BGH-D09,BGH,Do,Nhà trường bố trí hệ thống quản lý học tập trực tuyến đáp ứng nhu cầu đào tạo ngành GDMN.,TH,S11/1,19
+OBS4,DEMO-0.1,BGH-D10,BGH,Do,Nhà trường cung cấp quyền tiếp cận phần mềm cần thiết cho dạy học ngành GDMN.,TH,S2/M2.3,20
+OBS4,DEMO-0.1,BGH-D11,BGH,Do,Nhà trường bố trí thiết bị đáp ứng hoạt động dạy học có ứng dụng CNS của ngành GDMN.,TH,S2/B2,21
+OBS4,DEMO-0.1,BGH-C01,BGH,Check,Nhà trường ban hành tiêu chí kiểm tra hoạt động ứng dụng CNS trong dạy học.,TH,S2/M2.3,22
+OBS4,DEMO-0.1,BGH-C02,BGH,Check,"Việc kiểm tra sử dụng nhiều nguồn minh chứng như đề cương học phần, học liệu, dự giờ, LMS và phản hồi người học.",TH,S11/1,23
+OBS4,DEMO-0.1,BGH-C03,BGH,Check,Nhà trường kiểm tra sự phù hợp giữa mục tiêu kế hoạch và kết quả triển khai thực tế.,TH,S1/B4,24
+OBS4,DEMO-0.1,BGH-C04,BGH,Check,Nhà trường đánh giá hiệu quả sử dụng các nguồn lực công nghệ phục vụ dạy học.,TH,S1/B4,25
+OBS4,DEMO-0.1,BGH-C05,BGH,Check,"Nhà trường thu thập phản hồi của khoa, giảng viên và sinh viên về thuận lợi, khó khăn và hiệu quả ứng dụng.",TH,S1/B4,26
+OBS4,DEMO-0.1,BGH-C06,BGH,Check,Kết quả kiểm tra được tổng hợp thành dữ liệu phục vụ quyết định quản lý.,TH,S11/1,27
+OBS4,DEMO-0.1,BGH-A01,BGH,Act,Nhà trường giao trách nhiệm khắc phục những hạn chế được phát hiện sau kiểm tra.,TH,S11/1,28
+OBS4,DEMO-0.1,BGH-A02,BGH,Act,"Kết quả kiểm tra và phản hồi được sử dụng để điều chỉnh kế hoạch, quy định hoặc cách phân bổ nguồn lực.",TH,S1/B4,29
+OBS4,DEMO-0.1,BGH-A03,BGH,Act,"Các thực hành hiệu quả được tổng kết, chuẩn hóa và nhân rộng giữa các khoa/ngành.",TH,S11/1,30
+OBS4,DEMO-0.1,BGH-A04,BGH,Act,Nhà trường theo dõi việc hoàn thành các hành động cải tiến đã thống nhất.,TH,S11/1,31
+OBS4,DEMO-0.1,BGH-A05,BGH,Act,Dữ liệu của chu trình trước được sử dụng làm căn cứ cho kế hoạch ứng dụng CNS của chu trình tiếp theo.,TH,S11/1,32
+OBS4,DEMO-0.1,BGH-A06,BGH,Act,Nhà trường điều chỉnh cơ chế khen thưởng hoặc hỗ trợ dựa trên kết quả đánh giá hoạt động ứng dụng CNS.,TH,S2/M2.3,33
+OBS4,DEMO-0.1,BGH-F01,BGH,Ảnh hưởng,Năng lực lãnh đạo số của đội ngũ quản lý ảnh hưởng đến kết quả quản lý hoạt động.,AH,S11/1,34
+OBS4,DEMO-0.1,BGH-F02,BGH,Ảnh hưởng,Nguồn kinh phí dành cho ứng dụng CNS ảnh hưởng đến kết quả quản lý hoạt động.,AH,S11/1,35
+OBS4,DEMO-0.1,BGH-F03,BGH,Ảnh hưởng,Chính sách về ứng dụng CNS trong giáo dục ảnh hưởng đến kết quả quản lý hoạt động.,AH,S11/1,36
+OBS4,DEMO-0.1,BGH-KK01,BGH,Khó khăn,Nhà trường gặp khó khăn do thiếu kinh phí triển khai ứng dụng CNS trong dạy học.,KK,S11/1,37
+OBS4,DEMO-0.1,BGH-KK02,BGH,Khó khăn,Nhà trường gặp khó khăn do quy trình phối hợp giữa các đơn vị chưa rõ.,KK,S11/1,38
+OBS4,DEMO-0.1,BGH-KK03,BGH,Khó khăn,Nhà trường gặp khó khăn khi cụ thể hóa chính sách về ứng dụng CNS thành hướng dẫn thực hiện.,KK,S11/1,39
+OBS4,DEMO-0.1,KHOA-P01,KHOA,Plan,Khoa/ngành cụ thể hóa kế hoạch của trường thành kế hoạch phù hợp với chương trình đào tạo GDMN.,TH,S11/2,40
+OBS4,DEMO-0.1,KHOA-P02,KHOA,Plan,Kế hoạch của khoa xác định các học phần và hoạt động nghề nghiệp cần ưu tiên tích hợp CNS.,TH,S6/M4.3,41
+OBS4,DEMO-0.1,KHOA-P03,KHOA,Plan,"Khoa sử dụng thông tin về năng lực giảng viên, sinh viên và điều kiện thực tế khi lập kế hoạch.",TH,S1/B1,42
+OBS4,DEMO-0.1,KHOA-P04,KHOA,Plan,Giảng viên và bộ phận hỗ trợ được tham gia góp ý khi xây dựng kế hoạch.,TH,S11/2,43
+OBS4,DEMO-0.1,KHOA-P05,KHOA,Plan,"Kế hoạch xác định sản phẩm/minh chứng cần đạt như đề cương tích hợp, học liệu số, e-portfolio hoặc bài dạy vi mô.",TH,S11/2,44
+OBS4,DEMO-0.1,KHOA-D01,KHOA,Do,Khoa phân công nhiệm vụ ứng dụng CNS phù hợp với năng lực của giảng viên.,TH,S11/2,45
+OBS4,DEMO-0.1,KHOA-D02,KHOA,Do,Khoa hướng dẫn giảng viên đưa mục tiêu ứng dụng CNS vào đề cương và kế hoạch giảng dạy học phần.,TH,S6/M4.3,46
+OBS4,DEMO-0.1,KHOA-D03,KHOA,Do,Khoa tổ chức thẩm định học liệu số trước khi đưa vào sử dụng trong đào tạo GDMN.,TH,S9/2,47
+OBS4,DEMO-0.1,KHOA-D04,KHOA,Do,Khoa tổ chức sinh hoạt chuyên môn hoặc bồi dưỡng về thiết kế dạy học có tích hợp CNS.,TH,S6/M4.3,48
+OBS4,DEMO-0.1,KHOA-D05,KHOA,Do,Giảng viên được quan sát các ví dụ làm mẫu về tích hợp CNS trong đào tạo giáo viên mầm non.,TH,S6/M4.3,49
+OBS4,DEMO-0.1,KHOA-D06,KHOA,Do,Khoa tạo điều kiện cho giảng viên thử nghiệm bài dạy có ứng dụng CNS.,TH,S4/M4.1.6,50
+OBS4,DEMO-0.1,KHOA-D07,KHOA,Do,Khoa phối hợp với phòng chức năng và bộ phận kỹ thuật để xử lý kịp thời khó khăn của giảng viên.,TH,S11/2,51
+OBS4,DEMO-0.1,KHOA-D08,KHOA,Do,Khoa tổ chức cơ hội cho sinh viên thực hành dạy học có ứng dụng CNS.,TH,S4/M4.1,52
+OBS4,DEMO-0.1,KHOA-D09,KHOA,Do,Khoa hướng dẫn việc bảo vệ dữ liệu của trẻ em khi sử dụng trong học tập và thực hành nghề.,TH,S10/M2.3,53
+OBS4,DEMO-0.1,KHOA-D10,KHOA,Do,Khoa tổ chức chia sẻ học liệu số giữa các giảng viên.,TH,S9/2,54
+OBS4,DEMO-0.1,KHOA-D11,KHOA,Do,Khoa tổ chức cho giảng viên xây dựng học liệu số phù hợp với ngành GDMN.,TH,S9/2,55
+OBS4,DEMO-0.1,KHOA-C01,KHOA,Check,Khoa có tiêu chí kiểm tra mức độ tích hợp CNS trong đề cương và kế hoạch dạy học.,TH,S11/2,56
+OBS4,DEMO-0.1,KHOA-C02,KHOA,Check,Khoa thực hiện dự giờ hoặc xem xét minh chứng dạy học có ứng dụng CNS.,TH,S2/M2.3,57
+OBS4,DEMO-0.1,KHOA-C03,KHOA,Check,"Khoa đánh giá sự phù hợp giữa công nghệ, mục tiêu, nội dung, phương pháp và kiểm tra đánh giá.",TH,S9/3,58
+OBS4,DEMO-0.1,KHOA-C04,KHOA,Check,Khoa sử dụng phản hồi của sinh viên để đánh giá chất lượng triển khai ứng dụng CNS.,TH,S1/B4,59
+OBS4,DEMO-0.1,KHOA-C05,KHOA,Check,Khoa kiểm tra chất lượng sản phẩm số của sinh viên phục vụ thực hành nghề GDMN.,TH,S10/M2.3,60
+OBS4,DEMO-0.1,KHOA-A01,KHOA,Act,Khoa phản hồi cụ thể cho giảng viên sau kiểm tra hoặc dự giờ.,TH,S2/M2.3,61
+OBS4,DEMO-0.1,KHOA-A02,KHOA,Act,Khoa điều chỉnh nội dung học phần dựa trên kết quả đánh giá việc tích hợp CNS.,TH,S11/2,62
+OBS4,DEMO-0.1,KHOA-A03,KHOA,Act,"Khoa đề xuất bổ sung hoặc phân bổ lại thiết bị, phần mềm và nguồn hỗ trợ theo nhu cầu thực tế.",TH,S1/B4,63
+OBS4,DEMO-0.1,KHOA-A04,KHOA,Act,Khoa phổ biến và nhân rộng các thực hành dạy học số có hiệu quả.,TH,S11/2,64
+OBS4,DEMO-0.1,KHOA-A05,KHOA,Act,Khoa theo dõi kết quả thực hiện các kiến nghị cải tiến.,TH,S11/2,65
+OBS4,DEMO-0.1,KHOA-A06,KHOA,Act,Khoa tư vấn cho giảng viên điều chỉnh phương pháp dạy học có ứng dụng CNS sau kiểm tra.,TH,S11/2,66
+OBS4,DEMO-0.1,KHOA-DK01,KHOA,Điều kiện,Trang thiết bị tại phòng học thực hành mầm non đáp ứng các nhiệm vụ có ứng dụng CNS.,DY,S11/2,67
+OBS4,DEMO-0.1,KHOA-F01,KHOA,Ảnh hưởng,Năng lực số của giảng viên ảnh hưởng đến kết quả triển khai ứng dụng CNS.,AH,S11/2,68
+OBS4,DEMO-0.1,KHOA-F02,KHOA,Ảnh hưởng,Trang thiết bị tại phòng học thực hành mầm non ảnh hưởng đến kết quả triển khai ứng dụng CNS.,AH,S11/2,69
+OBS4,DEMO-0.1,KHOA-F03,KHOA,Ảnh hưởng,Thời lượng dành cho thực hành ứng dụng CNS trong chương trình ảnh hưởng đến kết quả triển khai.,AH,S11/2,70
+OBS4,DEMO-0.1,KHOA-F04,KHOA,Ảnh hưởng,"Sự phối hợp giữa khoa, phòng chức năng và bộ phận kỹ thuật ảnh hưởng đến kết quả quản lý.",AH,S11/2,71
+OBS4,DEMO-0.1,KHOA-F05,KHOA,Ảnh hưởng,Yêu cầu phù hợp với đặc điểm phát triển của trẻ mầm non ảnh hưởng đến việc lựa chọn công nghệ trong đào tạo.,AH,S11/2,72
+OBS4,DEMO-0.1,GV-VT01,GV,Vai trò,Ứng dụng CNS giúp sinh viên hiểu rõ hơn nội dung đào tạo GDMN.,DY,S3/B1,73
+OBS4,DEMO-0.1,GV-VT02,GV,Vai trò,Ứng dụng CNS góp phần hình thành năng lực nghề nghiệp số cho sinh viên GDMN.,DY,S10/M2.3,74
+OBS4,DEMO-0.1,GV-MT01,GV,Mục tiêu,Tôi xác định rõ kết quả học tập cần đạt trước khi lựa chọn công nghệ sử dụng.,TS,S9/3,75
+OBS4,DEMO-0.1,GV-MT02,GV,Mục tiêu,Tôi đưa yêu cầu vận dụng CNS vào mục tiêu học tập của những nhiệm vụ nghề nghiệp GDMN phù hợp.,TS,S10/M2.3,76
+OBS4,DEMO-0.1,GV-ND01,GV,Nội dung,Tôi sử dụng CNS để tổ chức nguồn học liệu cho học phần.,TS,S9/2,77
+OBS4,DEMO-0.1,GV-ND02,GV,Nội dung,Tôi hướng dẫn sinh viên đánh giá độ tin cậy của học liệu số.,TS,S9/6,78
+OBS4,DEMO-0.1,GV-ND03,GV,Nội dung,Tôi hướng dẫn sinh viên thiết kế sản phẩm số phục vụ hoạt động giáo dục trẻ mầm non.,TS,S10/M2.3,79
+OBS4,DEMO-0.1,GV-ND04,GV,Nội dung,Tôi hướng dẫn sinh viên tuân thủ bản quyền khi sử dụng học liệu số.,TS,S8/PL,80
+OBS4,DEMO-0.1,GV-HT01,GV,Hình thức,Tôi tổ chức hoạt động học trực tiếp có hỗ trợ CNS.,TS,S2/B1,81
+OBS4,DEMO-0.1,GV-HT02,GV,Hình thức,Tôi tổ chức hoạt động học trực tuyến bổ trợ cho giờ học trực tiếp.,TS,S4/M4.1.6,82
+OBS4,DEMO-0.1,GV-HT03,GV,Hình thức,Tôi tổ chức hoạt động học nhóm trên môi trường số.,TS,S9/3,83
+OBS4,DEMO-0.1,GV-HT04,GV,Hình thức,Tôi tổ chức hoạt động thực hành nghề GDMN có hỗ trợ CNS.,TS,S4/M4.1,84
+OBS4,DEMO-0.1,GV-PP01,GV,Phương pháp,Tôi lựa chọn công nghệ theo mục tiêu sư phạm của bài học.,TS,S9/3,85
+OBS4,DEMO-0.1,GV-PP02,GV,Phương pháp,Tôi làm mẫu cách tích hợp CNS phù hợp với hoạt động giáo dục trẻ mầm non.,TS,S4/M4.1,86
+OBS4,DEMO-0.1,GV-PP03,GV,Phương pháp,Tôi giao nhiệm vụ để sinh viên thiết kế sản phẩm hoặc bài dạy có ứng dụng CNS.,TS,S4/M4.1,87
+OBS4,DEMO-0.1,GV-PP04,GV,Phương pháp,Tôi tổ chức cho sinh viên góp ý sản phẩm của nhau bằng công cụ số.,TS,S9/3,88
+OBS4,DEMO-0.1,GV-DG01,GV,Đánh giá,Tôi sử dụng công cụ số để thu thập minh chứng về kết quả học tập của sinh viên.,TS,S9/4,89
+OBS4,DEMO-0.1,GV-DG02,GV,Đánh giá,Tôi thông báo tiêu chí đánh giá sản phẩm số trước khi sinh viên thực hiện nhiệm vụ.,TS,S11/3,90
+OBS4,DEMO-0.1,GV-DG03,GV,Đánh giá,Tôi cung cấp phản hồi qua môi trường số kịp thời để sinh viên điều chỉnh bài làm.,TS,S9/4,91
+OBS4,DEMO-0.1,GV-DG04,GV,Đánh giá,Tôi thực hiện biện pháp bảo vệ dữ liệu cá nhân khi đánh giá trên môi trường số.,TS,S9/2,92
+OBS4,DEMO-0.1,GV-QLP01,GV,Plan cảm nhận,Kế hoạch ứng dụng CNS của đơn vị nêu rõ yêu cầu đối với giảng viên.,DY,S2/B2,93
+OBS4,DEMO-0.1,GV-QLP02,GV,Plan cảm nhận,Tôi được tham gia góp ý cho kế hoạch ứng dụng CNS của đơn vị.,DY,S11/3,94
+OBS4,DEMO-0.1,GV-QLD01,GV,Do cảm nhận,Đơn vị phân công rõ trách nhiệm triển khai ứng dụng CNS.,DY,S2/B3,95
+OBS4,DEMO-0.1,GV-QLD02,GV,Do cảm nhận,Hoạt động bồi dưỡng do đơn vị tổ chức đáp ứng nhu cầu tích hợp CNS vào chuyên môn GDMN.,DY,S6/M4.3,96
+OBS4,DEMO-0.1,GV-QLD03,GV,Do cảm nhận,Tôi nhận được hỗ trợ kỹ thuật kịp thời từ đơn vị hoặc qua đầu mối do đơn vị bố trí.,DY,S11/3,97
+OBS4,DEMO-0.1,GV-QLD04,GV,Do cảm nhận,Đơn vị tạo điều kiện để tôi tiếp cận thiết bị phục vụ dạy học có ứng dụng CNS.,DY,S2/M2.3,98
+OBS4,DEMO-0.1,GV-QLD05,GV,Do cảm nhận,Đơn vị bố trí thời gian để tôi chuẩn bị hoạt động dạy học có ứng dụng CNS.,DY,S11/3,99
+OBS4,DEMO-0.1,GV-QLD06,GV,Do cảm nhận,Đơn vị tạo điều kiện để tôi tiếp cận phần mềm cần thiết cho dạy học.,DY,S2/M2.3,100
+OBS4,DEMO-0.1,GV-QLD07,GV,Do cảm nhận,Đơn vị tạo điều kiện để tôi tiếp cận học liệu số phù hợp với học phần.,DY,S9/2,101
+OBS4,DEMO-0.1,GV-QLC01,GV,Check cảm nhận,Đơn vị công bố rõ tiêu chí kiểm tra hoạt động ứng dụng CNS.,DY,S2/M2.3,102
+OBS4,DEMO-0.1,GV-QLC02,GV,Check cảm nhận,Việc kiểm tra của đơn vị sử dụng minh chứng về chất lượng dạy học.,DY,S11/3,103
+OBS4,DEMO-0.1,GV-QLA01,GV,Act cảm nhận,Phản hồi sau kiểm tra của đơn vị giúp tôi điều chỉnh hoạt động dạy học.,DY,S2/M2.3,104
+OBS4,DEMO-0.1,GV-QLA02,GV,Act cảm nhận,Đơn vị sử dụng các kiến nghị của giảng viên để cải tiến điều kiện hỗ trợ.,DY,S11/3,105
+OBS4,DEMO-0.1,GV-F01,GV,Ảnh hưởng,Năng lực số của bản thân ảnh hưởng đến mức độ ứng dụng CNS trong dạy học.,AH,S6/M4.3,106
+OBS4,DEMO-0.1,GV-F02,GV,Ảnh hưởng,Thời gian chuẩn bị học liệu và bài dạy số ảnh hưởng đến mức độ ứng dụng CNS.,AH,S11/3,107
+OBS4,DEMO-0.1,GV-F03,GV,Ảnh hưởng,Sự ổn định của hạ tầng công nghệ ảnh hưởng đến mức độ ứng dụng CNS trong dạy học.,AH,S11/3,108
+OBS4,DEMO-0.1,GV-F04,GV,Ảnh hưởng,Thái độ của sinh viên đối với CNS ảnh hưởng đến việc tổ chức hoạt động học tập.,AH,S7/M3.2,109
+OBS4,DEMO-0.1,GV-F05,GV,Ảnh hưởng,Sự hỗ trợ của lãnh đạo ảnh hưởng đến động lực ứng dụng CNS của tôi.,AH,S5/M7,110
+OBS4,DEMO-0.1,GV-F06,GV,Ảnh hưởng,Yêu cầu bảo vệ dữ liệu trẻ em ảnh hưởng đến cách tôi sử dụng CNS trong đào tạo.,AH,S10/M2.3,111
+OBS4,DEMO-0.1,GV-F07,GV,Ảnh hưởng,Năng lực số của sinh viên ảnh hưởng đến việc tổ chức hoạt động học tập.,AH,S7/M3.2,112
+OBS4,DEMO-0.1,GV-KK01,GV,Khó khăn,Tôi gặp khó khăn do chưa thành thạo công cụ số cần dùng trong dạy học.,KK,S11/3,113
+OBS4,DEMO-0.1,GV-KK02,GV,Khó khăn,Tôi gặp khó khăn do thiếu thời gian chuẩn bị học liệu số.,KK,S11/3,114
+OBS4,DEMO-0.1,GV-KK03,GV,Khó khăn,Tôi gặp khó khăn do hạ tầng công nghệ hoạt động không ổn định.,KK,S11/3,115
+OBS4,DEMO-0.1,GV-NC01,GV,Nhu cầu,Tôi cần được bồi dưỡng về thiết kế hoạt động học có tích hợp CNS phù hợp với đào tạo GDMN.,NC,S6/M4.3,116
+OBS4,DEMO-0.1,GV-NC02,GV,Nhu cầu,Tôi cần được hướng dẫn xử lý sự cố kỹ thuật thường gặp trong dạy học số.,NC,S11/3,117
+OBS4,DEMO-0.1,GV-NC03,GV,Nhu cầu,Tôi cần được hỗ trợ thêm về thiết bị để triển khai dạy học có ứng dụng CNS.,NC,S11/3,118
+OBS4,DEMO-0.1,SV-NT01,SV,Nhận thức,Năng lực sử dụng CNS là cần thiết đối với nghề giáo viên mầm non tương lai.,DY,S10/M2.3,119
+OBS4,DEMO-0.1,SV-NT02,SV,Nhận thức,Ứng dụng CNS phù hợp có thể hỗ trợ việc học tập và phát triển của trẻ mầm non.,DY,S3/B1,120
+OBS4,DEMO-0.1,SV-NT03,SV,Nhận thức,"Giáo viên mầm non cần biết lựa chọn công nghệ phù hợp với độ tuổi, mục tiêu và bối cảnh của trẻ.",DY,S10/M2.3,121
+OBS4,DEMO-0.1,SV-TN01,SV,Trải nghiệm,Giảng viên sử dụng CNS để cung cấp học liệu cho học phần chuyên ngành GDMN.,TS,S9/2,122
+OBS4,DEMO-0.1,SV-TN02,SV,Trải nghiệm,Giảng viên sử dụng CNS để minh họa tình huống hoặc hoạt động thực tế ở cơ sở mầm non.,TS,S6/M4.2,123
+OBS4,DEMO-0.1,SV-TN03,SV,Trải nghiệm,Tôi tham gia hoạt động học nhóm trên môi trường số trong học phần chuyên ngành GDMN.,TS,S9/3,124
+OBS4,DEMO-0.1,SV-TN04,SV,Trải nghiệm,Tôi được giảng viên hướng dẫn đánh giá độ tin cậy của học liệu số.,TS,S9/6,125
+OBS4,DEMO-0.1,SV-TN05,SV,Trải nghiệm,Tôi được giảng viên hướng dẫn thiết kế học liệu số phục vụ giáo dục trẻ mầm non.,TS,S10/M2.3,126
+OBS4,DEMO-0.1,SV-TN06,SV,Trải nghiệm,Tôi tham gia thực hành hoặc vi giảng có sử dụng CNS.,TS,S4/M4.1,127
+OBS4,DEMO-0.1,SV-TN07,SV,Trải nghiệm,Tôi nhận được phản hồi để cải tiến sản phẩm hoặc bài dạy có ứng dụng CNS.,TS,S9/4,128
+OBS4,DEMO-0.1,SV-TN08,SV,Trải nghiệm,Giảng viên làm mẫu cách sử dụng CNS phù hợp với nghề giáo viên mầm non.,TS,S4/M4.1,129
+OBS4,DEMO-0.1,SV-HQ01,SV,Hiệu quả cảm nhận,CNS giúp tôi hiểu rõ hơn nội dung học phần.,DY,S3/B1,130
+OBS4,DEMO-0.1,SV-HQ02,SV,Hiệu quả cảm nhận,Hoạt động học có ứng dụng CNS làm tăng hứng thú học tập của tôi.,DY,S3/B1,131
+OBS4,DEMO-0.1,SV-HQ03,SV,Hiệu quả cảm nhận,Hoạt động học có ứng dụng CNS giúp tôi phát triển khả năng tự học.,DY,S9/3,132
+OBS4,DEMO-0.1,SV-HQ04,SV,Hiệu quả cảm nhận,Hoạt động học có ứng dụng CNS giúp tôi tự tin hơn khi thiết kế hoạt động giáo dục trẻ.,DY,S3/B2,133
+OBS4,DEMO-0.1,SV-HQ05,SV,Hiệu quả cảm nhận,Hoạt động học có ứng dụng CNS làm tăng mức độ tham gia của tôi vào nhiệm vụ học tập.,DY,S9/5,134
+OBS4,DEMO-0.1,SV-DG01,SV,Đánh giá,"Hình thức kiểm tra, đánh giá bằng công nghệ phù hợp với mục tiêu học phần.",DY,S9/4,135
+OBS4,DEMO-0.1,SV-DG02,SV,Đánh giá,Tiêu chí đánh giá sản phẩm/bài làm số được thông báo rõ ràng.,DY,S11/4,136
+OBS4,DEMO-0.1,SV-DG03,SV,Đánh giá,Tôi nhận được phản hồi kịp thời qua hệ thống số.,DY,S9/4,137
+OBS4,DEMO-0.1,SV-DG04,SV,Đánh giá,Các bài làm được đánh giá theo tiêu chí thống nhất khi kiểm tra trên môi trường số.,DY,S11/4,138
+OBS4,DEMO-0.1,SV-DG05,SV,Đánh giá,Thao tác thực hiện bài kiểm tra trên hệ thống số thuận tiện đối với tôi.,DY,S11/4,139
+OBS4,DEMO-0.1,SV-DG06,SV,Đánh giá,Kết quả đánh giá bài làm trên hệ thống số phản ánh đúng mức độ đáp ứng tiêu chí đã công bố.,DY,S11/4,140
+OBS4,DEMO-0.1,SV-DK01,SV,Điều kiện,Đường truyền mạng của nhà trường đáp ứng việc học tập trực tuyến của tôi.,DY,S11/4,141
+OBS4,DEMO-0.1,SV-DK02,SV,Điều kiện,Thiết bị cá nhân của tôi đáp ứng các nhiệm vụ học tập có sử dụng CNS.,DY,S11/4,142
+OBS4,DEMO-0.1,SV-DK03,SV,Điều kiện,Tôi nhận được hỗ trợ kịp thời khi gặp khó khăn kỹ thuật.,DY,S5/M7,143
+OBS4,DEMO-0.1,SV-DK04,SV,Điều kiện,Hệ thống quản lý học tập trực tuyến của nhà trường hoạt động ổn định khi tôi sử dụng.,DY,S11/4,144
+OBS4,DEMO-0.1,SV-DK05,SV,Điều kiện,Tôi truy cập được học liệu số do giảng viên cung cấp khi cần học tập.,DY,S9/2,145
+OBS4,DEMO-0.1,SV-AT01,SV,An toàn,Tôi được hướng dẫn tuân thủ bản quyền khi tạo hoặc chia sẻ sản phẩm số.,DY,S8/PL,146
+OBS4,DEMO-0.1,SV-AT02,SV,An toàn,Tôi được hướng dẫn sử dụng hình ảnh và dữ liệu của trẻ em một cách có trách nhiệm.,DY,S10/M2.3,147
+OBS4,DEMO-0.1,SV-AT03,SV,An toàn,Tôi được hướng dẫn bảo vệ dữ liệu cá nhân khi học tập trên môi trường số.,DY,S8/PL,148
+OBS4,DEMO-0.1,SV-KK01,SV,Khó khăn,Tôi gặp khó khăn khi thao tác trên phần mềm được yêu cầu trong học phần.,KK,S11/4,149
+OBS4,DEMO-0.1,SV-KK02,SV,Khó khăn,Tôi gặp khó khăn do thiếu thiết bị cá nhân phù hợp với nhiệm vụ học tập.,KK,S11/4,150
+OBS4,DEMO-0.1,SV-NC01,SV,Nhu cầu,Tôi cần được học thêm cách tích hợp CNS vào hoạt động giáo dục trẻ mầm non.,NC,S3/B3,151
+OBS4,DEMO-0.1,SV-NC02,SV,Nhu cầu,Tôi cần thêm cơ hội thực hành thiết kế học liệu hoặc bài dạy số.,NC,S3/B3,152
+OBS4,DEMO-0.1,SV-NC03,SV,Nhu cầu,Tôi cần được hướng dẫn cách xử lý các rào cản khi sử dụng CNS trong thực tế nghề nghiệp.,NC,S3/B3,153
+OBS4,DEMO-0.1,SV-NC04,SV,Nhu cầu,Tôi cần được hướng dẫn đánh giá sự phù hợp của công nghệ đối với sự phát triển của trẻ.,NC,S10/M2.3,154

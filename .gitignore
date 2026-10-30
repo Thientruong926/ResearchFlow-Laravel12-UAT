@@ -5,7 +5,13 @@
 /storage/app/private/*
 !/storage/app/private/.gitkeep
 /storage/app/research-settings.json
+/storage/app/research-settings.json.lock
+/storage/app/research-settings.json.*.tmp
+/storage/app/research-settings.json.backups/
 /storage/framework/views/*.php
 /.phpunit.result.cache
 /database/*.sqlite
 /bootstrap/cache/*.php
+/.phpunit.result.cache
+/storage/framework/views/*.php
+/storage/framework/testing/

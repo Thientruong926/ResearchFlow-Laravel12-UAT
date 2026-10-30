@@ -127,10 +127,8 @@ class ResearchDataUatTest extends TestCase
         $this->assertNotNull($participant);
         $this->assertNotNull($session);
 
-        // Research ID phải là UUID hợp lệ.
-        $this->assertTrue(
-            Str::isUuid($participant->research_id)
-        );
+        // B1: 128 bit ngẫu nhiên, R + 26 ký tự Base32 theo hồ sơ thiết kế.
+        $this->assertMatchesRegularExpression('/^R[A-Z2-7]{26}$/D', $participant->research_id);
 
         // Phiên khảo sát liên kết đúng người và bảng hỏi.
         $this->assertSame(

@@ -9,11 +9,11 @@ Các mô tả dưới đây tóm lược năm phiếu phân công do người d�
 | A3 | Range check, required, cảnh báo thiếu, autosave | `PortalController::save`, draft submit, Blade form | Partial: lưu nháp thủ công, autosave online tuần tự, kiểm tra range/choices/text; KHÔNG có offline queue (cần UAT mất mạng) |
 | A4 | Version bảng hỏi, changelog, khóa | `surveys.version/status`, `audit_events` | Partial: có clone phiên bản đã công bố thành bản nháp mới, sửa/xóa có kiểm soát câu hỏi bản nháp và khóa phiên bản cũ; chưa có version diff/biên bản duyệt nội dung chính thức |
 | A5 | Test đa thiết bị/nhánh/mất kết nối/UAT | `tests/Feature`, `docs/UAT_CHECKLIST.md` | Blocked: chưa chạy UAT thực tế và bài kiểm tra offline |
-| B1 | Research ID duy nhất, không PII | UUID random trong `participants.research_id` | Implemented |
-| B2 | Mã cơ sở/đợt/nhóm; QR/link registry | `sites`,`waves`,`sample_links`, `/links/{id}/qr` | Implemented SVG; mã dùng theo kế hoạch NCS |
-| B3 | Participant/session/response/consent/version/site + PK/FK/time | migrations, `docs/ERD.md` | Implemented schema |
-| B4 | Duplicate session/token flag, không fingerprint | `QualityService::reusedToken` | Partial: chỉ gắn cờ token gửi lại, không chứng minh trùng người |
-| B5 | Backup/restore, ít quyền, log truy cập | scripts/backup/restore, role middleware, audit | Partial: có khóa/mở tài khoản và chặn phiên đã khóa; nhật ký môi trường Windows trước bàn giao ghi nhận restore thủ công/đối soát 23 bảng; chưa xác minh script luồng thành công trên máy nhận và log truy cập đọc dữ liệu đầy đủ |
+| B1 | Research ID duy nhất, không PII | `ResearchId`, UNIQUE `participants.research_id` | ID mới R + 26 Base32, retry collision; UUID cũ giữ nguyên; đã thử 10.000 ID |
+| B2 | Mã cơ sở/khoa/lớp/đợt; QR/link registry | `SamplingRoute`, `LinkRegistryController`, departments, instrument/form metadata | Có token SHA-256 mới, QR cấp một lần, thời hạn, lifecycle, D11, thay thế, pin phiên bản; điểm và thời hạn thật chờ NCS |
+| B3 | Participant/session/response/consent/version/site + PK/FK/time | Bốn migration 22/10/2026, `docs/NGUOI_B_TRIEN_KHAI.md` | Có provenance link, missing_code, ngân hàng 227 biến DEMO nhập thành nháp; chưa migrate DB thật |
+| B4 | Duplicate session/token flag, không fingerprint | `TechnicalDuplicates`, `technical_duplicate_flags`, trang rà soát | Có SESSION_REPLAY, scan RESEARCH_REPEAT, audit collision; không gắn cờ quét QR chung, không tự loại mẫu |
+| B5 | Backup/restore, ít quyền, log truy cập | scripts MySQL, `RestoreVerification`, `ResearchAccess`, audit | Có NCS/IT_ADMIN/ANALYST/SITE_COORDINATOR/AUDITOR; coordinator chỉ xem điểm được giao; SQLite restore thử có digest; MySQL thực tế/lịch mã hóa/MFA còn cần nghiệm thu |
 | C1 | Dashboard theo nhóm/site/đợt/hoàn tất | `AdminController::dashboard`, view | Implemented aggregate, cần đối soát/cỡ mẫu tối thiểu để hạn chế re-identification |
 | C2 | Too-fast, high missing, straight-line, logic, duplicate | QC rule table + `QualityService` | Partial: 4 quy tắc, logic contradiction chưa có đặc tả khoa học |
 | C3 | Valid/Review/Exclude + lý do + người duyệt + audit | qc_decisions, audit | Implemented workflow (nhưng cần tiêu chí khoa học) |

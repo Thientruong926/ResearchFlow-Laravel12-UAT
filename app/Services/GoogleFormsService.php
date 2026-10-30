@@ -41,7 +41,7 @@ class GoogleFormsService
         }
     }
 
-    public function connectionStatus(array $assignment): array
+    public function connectionStatus(array $assignment, ?float $deadline = null): array
     {
         if (! config('research.google_sync_enabled')) {
             return ['ok' => false, 'message' => 'Đồng bộ đang tắt'];
@@ -52,14 +52,10 @@ class GoogleFormsService
             return ['ok' => false, 'message' => 'Chưa cấu hình Form ID'];
         }
 
-        try {
-            $response = Http::timeout(8)->get("https://docs.google.com/forms/d/e/{$formId}/viewform");
-            return $response->successful()
-                ? ['ok' => true, 'message' => 'Đã kết nối']
-                : ['ok' => false, 'message' => 'Google Forms trả HTTP '.$response->status()];
-        } catch (ConnectionException) {
-            return ['ok' => false, 'message' => 'Không thể kết nối'];
-        }
+        $response = app(ConnectionHttpClient::class)->get("https://docs.google.com/forms/d/e/{$formId}/viewform", $deadline ?? microtime(true) + 30, false);
+        return isset($response['error'])
+            ? ['ok' => false, 'message' => 'Không truy cập được trang Form: '.$response['error']]
+            : ['ok' => true, 'message' => 'Trang Form truy cập được; chưa chứng minh nhận phản hồi.'];
     }
 
     private function formId(string $value): string

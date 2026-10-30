@@ -7,18 +7,10 @@ use RuntimeException;
 
 class ResearchSettings
 {
+    public function __construct(private SettingsFileStore $store) {}
     public function all(): array
     {
-        $defaults = config('research.default_settings', []);
-        $path = config('research.settings_file');
-
-        if (! is_file($path)) {
-            return $defaults;
-        }
-
-        $decoded = json_decode((string) file_get_contents($path), true);
-
-        return is_array($decoded) ? array_replace_recursive($defaults, $decoded) : $defaults;
+        return $this->store->read();
     }
 
     public function research(): array
@@ -50,15 +42,23 @@ class ResearchSettings
         return collect($this->schools())->firstWhere('code', $code);
     }
 
-    public function updateResearch(array $research, array $columns): void
+    public function updateResearch(array $research, string $revision, string $actor = 'admin'): void
     {
-        $settings = $this->all();
-        $settings['research'] = $research;
-        $settings['sheet_columns'] = $columns;
-        $this->write($settings);
+        $this->store->update($revision, function ($settings) use ($research) {
+            $settings['research'] = array_replace($settings['research'], Arr::only($research, ['title','introduction','consent','contact_name','contact_email','contact_phone','contact_address']));
+            return $settings;
+        }, $actor);
     }
 
-    public function updateSchools(string $lines): void
+    public function updateColumns(array $columns, string $revision, string $actor = 'admin'): void
+    {
+        $this->store->update($revision, function ($settings) use ($columns) {
+            $settings['sheet_columns'] = array_replace($settings['sheet_columns'], Arr::only($columns, ['timestamp','school','group']));
+            return $settings;
+        }, $actor);
+    }
+
+    public function updateSchools(string $lines, string $revision, string $actor = 'admin'): void
     {
         $schools = [];
 
@@ -93,41 +93,45 @@ class ResearchSettings
             throw new RuntimeException('Cần cấu hình ít nhất một trường.');
         }
 
-        $settings = $this->all();
+        $this->store->update($revision, function ($settings) use ($schools) {
         $settings['schools'] = $schools;
         $validCodes = array_column($schools, 'code');
         $settings['assignments'] = array_values(array_filter(
             $settings['assignments'],
             fn (array $assignment) => in_array($assignment['school'], $validCodes, true)
         ));
-        $this->write($settings);
+        return $settings;
+        }, $actor);
     }
 
-    public function upsertAssignment(array $data): void
+    public function upsertAssignment(array $data, string $revision, string $actor = 'admin'): void
     {
-        $settings = $this->all();
         $data['id'] = $data['school'].'-'.$data['group'];
         $data['active'] = (bool) ($data['active'] ?? false);
         $data['entries'] = Arr::only($data['entries'], [
             'school', 'group', 'use', 'level', 'total', 'digital', 'note',
         ]);
 
+        $this->store->update($revision, function ($settings) use ($data) {
+        if (! in_array($data['school'], array_column($settings['schools'], 'code'), true)) throw new RuntimeException('Trường không còn trong cấu hình.');
         $settings['assignments'] = array_values(array_filter(
             $settings['assignments'],
             fn (array $assignment) => ($assignment['id'] ?? '') !== $data['id']
         ));
         $settings['assignments'][] = $data;
-        $this->write($settings);
+        return $settings;
+        }, $actor);
     }
 
-    public function removeAssignment(string $id): void
+    public function removeAssignment(string $id, string $revision, string $actor = 'admin'): void
     {
-        $settings = $this->all();
+        $this->store->update($revision, function ($settings) use ($id) {
         $settings['assignments'] = array_values(array_filter(
             $settings['assignments'],
             fn (array $assignment) => ($assignment['id'] ?? '') !== $id
         ));
-        $this->write($settings);
+        return $settings;
+        }, $actor);
     }
 
     public function schoolsAsLines(): string
@@ -143,19 +147,4 @@ class ResearchSettings
         })->implode(PHP_EOL);
     }
 
-    private function write(array $settings): void
-    {
-        $path = config('research.settings_file');
-        $directory = dirname($path);
-
-        if (! is_dir($directory) && ! mkdir($directory, 0775, true) && ! is_dir($directory)) {
-            throw new RuntimeException('Không thể tạo thư mục cấu hình.');
-        }
-
-        $json = json_encode($settings, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-
-        if ($json === false || file_put_contents($path, $json, LOCK_EX) === false) {
-            throw new RuntimeException('Không thể lưu cấu hình nghiên cứu.');
-        }
-    }
 }

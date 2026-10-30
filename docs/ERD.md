@@ -5,6 +5,10 @@ erDiagram
     USERS ||--o{ AUDIT_EVENTS : acts
     SITES ||--o{ SAMPLE_LINKS : issues
     WAVES ||--o{ SAMPLE_LINKS : issues
+    SITES ||--o{ DEPARTMENTS : contains
+    DEPARTMENTS o|--o{ SAMPLE_LINKS : routes
+    SURVEYS o|--o{ SAMPLE_LINKS : pins_version
+    SAMPLE_LINKS o|--o{ PARTICIPANTS : invited_through
     SITES ||--o{ PARTICIPANTS : groups
     WAVES ||--o{ PARTICIPANTS : groups
     INFORMATION_VERSIONS ||--o{ CONSENTS : referenced_by
@@ -15,6 +19,7 @@ erDiagram
     SURVEY_SESSIONS ||--o{ ANSWERS : contains
     QUESTIONS ||--o{ ANSWERS : answered
     SURVEY_SESSIONS ||--o{ QUALITY_FLAGS : flags
+    SURVEY_SESSIONS ||--o{ TECHNICAL_DUPLICATE_FLAGS : technical_review
     QUALITY_RULES ||--o{ QUALITY_FLAGS : creates
     SURVEY_SESSIONS ||--o{ QC_DECISIONS : judged
     PARTICIPANTS ||--o{ PARTICIPANT_REQUESTS : requests
@@ -30,7 +35,7 @@ erDiagram
 | `quota_configs` | Quota phiên bản và duyệt | `site_id`, `wave_id`, nhóm, target, approved_by |
 | `information_versions` | Bản thông tin tham gia được duyệt | Version, mục đích/hoạt động/thời lượng/quyền rút lui/dữ liệu |
 | `surveys`, `questions` | Bảng hỏi theo nhóm và phiên bản | survey group/version unique, question survey/code unique, condition JSON |
-| `participants` | Research ID và nhóm/site/wave | UUID unique không suy ra họ tên |
+| `participants` | Research ID và nhóm/site/wave | ID mới R + 26 Base32 unique; UUID cũ giữ nguyên; sample_link_id nullable cho dữ liệu cũ |
 | `consents` | Chứng cứ đồng thuận tối thiểu | participant + thông tin version + decision + timestamp |
 | `survey_sessions` | Lần trả lời + resume token | participant/survey foreign keys; trạng thái draft/complete |
 | `answers` | Dữ liệu raw trong JSON đơn giản | survey_session/question unique; khóa tại controller sau complete |
@@ -48,4 +53,5 @@ erDiagram
 - `sites.private_label` là ghi chú nội bộ, không đưa vào dataset hoặc QR.
 - `resume_token` là bí mật truy cập cá nhân kiểu bearer link; **không chia sẻ công khai**. Nên tăng bảo vệ nếu triển khai internet/nhóm nguy cơ cao.
 - Trong export, biến phân tích đặt theo `Q{survey_id}_{code}` để không gộp nhầm 2 version; codebook phải duy trì nhất quán qua version.
+- Bổ sung 22/10/2026: `sample_links` có FK department/survey, point/class, SHA-256 token mới, lifecycle, thời hạn, chủ thể và người duyệt, D11, link thay thế. `waves` có instrument và thời hạn/kỳ tham chiếu. `surveys` có instrument/form_version duy nhất theo nhóm. `questions` giữ mã nguồn/cấu phần/nguồn; `answers` giữ missing_code. Xem `NGUOI_B_TRIEN_KHAI.md` cho từ điển dữ liệu và cách nâng cấp.
 - Thay đổi dữ liệu phân tích cần ghi cleaning log và pipeline được NCS chốt; bản raw không sửa/không xóa ngầm.

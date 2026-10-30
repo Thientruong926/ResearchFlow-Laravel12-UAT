@@ -23,6 +23,8 @@ ResearchFlow là ứng dụng Laravel 12 cung cấp giao diện khảo sát trê
 
 ## Kiến trúc dữ liệu
 
+Phạm vi quản lý mục 4–6 đã hoàn tất đầy đủ 5 sprint: [Sprint 0](docs/SPRINT_0_NEN_TANG.md), [hợp đồng nguồn](docs/HOP_DONG_NGUON_KHAO_SAT.md), [Sprint 1](docs/SPRINT_1_KET_NOI.md), [Sprint 2](docs/SPRINT_2_TRA_CUU_XUAT_DU_LIEU.md), [Sprint 3](docs/SPRINT_3_NOI_DUNG_NGHIEN_CUU.md) và [bàn giao Sprint 4](docs/SPRINT_4_TICH_HOP_UAT_BAN_GIAO.md). Bộ tiêu chí kiểm thử UAT xem tại [Checklist UAT Google](docs/UAT_CHECKLIST_GOOGLE.md). Hướng dẫn CSV bên dưới dành cho demo/dữ liệu được phép công khai; nguồn khảo sát riêng tư sẵn sàng tích hợp adapter API chỉ đọc khi bàn giao. Mã/tài liệu DB cũ trong repository không phải kiến trúc đang chạy.
+
 ```text
 Người tham gia -> Website -> Google Forms -> Google Sheets
                                             |
@@ -33,9 +35,11 @@ Người tham gia -> Website -> Google Forms -> Google Sheets
 - Chỉ chuyển câu trả lời khi `GOOGLE_SYNC_ENABLED=true`.
 - Website đọc báo cáo từ URL CSV của Google Sheets. Sheet phải có quyền đọc phù hợp hoặc được xuất bản.
 - Cấu hình nghiên cứu lưu tại `storage/app/research-settings.json`; file này không chứa câu trả lời và không được đưa lên Git.
-- Phiên đăng nhập dùng file. Các route đang hoạt động không dùng MySQL, migration hoặc seeder.
+- Phiên đăng nhập dùng file (`SESSION_DRIVER=file`). Các route đang hoạt động không dùng MySQL, migration hoặc seeder.
 
 ## Cài đặt nhanh trên Windows
+
+Trang nội dung nghiên cứu riêng, preview, revision, hướng dẫn backup/phục hồi và UAT nghiệm thu đã hoàn tất tại [bàn giao Sprint 4](docs/SPRINT_4_TICH_HOP_UAT_BAN_GIAO.md).
 
 Yêu cầu PHP 8.2 trở lên, Composer 2 và Internet. Không cần MySQL, Node.js hay NPM.
 
@@ -90,9 +94,10 @@ Nội dung đồng thuận phải nói rõ câu trả lời được chuyển đ
 php artisan route:list
 php artisan test
 php artisan research:check
+php artisan research:verify-flow
 ```
 
-Quy trình demo: trình bày cài đặt; cho xem kết nối Form/Sheet; gửi một phản hồi thử trong cửa sổ ẩn danh; xác nhận dòng mới trong Sheet; tải lại dashboard và trình bày thống kê, lọc, xuất CSV.
+Quy trình demo: trình bày cài đặt; cho xem kết nối Form/Sheet; gửi một phản hồi thử trong cửa sổ ẩn danh (có mã thử ví dụ `PILOT-001`); chạy `php artisan research:verify-flow --check-code=PILOT-001 --record-verification` để đối chiếu; tải lại trang quản lý xem trạng thái xác minh, bảng thống kê, tìm kiếm, xem chi tiết HMAC và xuất CSV an toàn.
 
 ## Giới hạn
 

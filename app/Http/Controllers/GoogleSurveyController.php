@@ -86,7 +86,7 @@ class GoogleSurveyController extends Controller
                 'note' => $data['note'] ?? null,
             ]);
         } catch (RuntimeException $exception) {
-            return back()->withInput()->withErrors(['submit' => $exception->getMessage()]);
+            return back()->withInput($request->only(['school', 'group']))->withErrors(['submit' => $exception->getMessage()]);
         }
 
         return redirect()->route('survey.thanks');

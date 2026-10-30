@@ -11,13 +11,13 @@ class DataController extends Controller {
    return view('data.index',['runs'=>DB::table('export_runs')->orderByDesc('id')->limit(20)->get(),'logs'=>DB::table('cleaning_logs')->orderByDesc('id')->limit(40)->get(),'transcripts'=>DB::table('transcripts as t')->join('participants as p','t.participant_id','=','p.id')->select('t.*','p.research_id')->orderByDesc('t.id')->limit(40)->get(),'count'=>DB::table('survey_sessions')->where('status','complete')->count()]);
  }
  public function codebook() {
-   $questions=DB::table('questions as q')->join('surveys as s','q.survey_id','=','s.id')->select('q.*','s.group_code','s.version')->orderBy('s.id')->orderBy('q.position')->get();return view('data.codebook',compact('questions'));
+   $questions=DB::table('questions as q')->join('surveys as s','q.survey_id','=','s.id')->select('q.*','s.group_code','s.version','s.instrument_id','s.form_version')->orderBy('s.id')->orderBy('q.position')->get();return view('data.codebook',compact('questions'));
  }
  public function codebookCsv() {
-   $qs=DB::table('questions as q')->join('surveys as s','q.survey_id','=','s.id')->select('q.*','s.group_code','s.version')->orderBy('s.id')->orderBy('q.position')->get();
+   $qs=DB::table('questions as q')->join('surveys as s','q.survey_id','=','s.id')->select('q.*','s.group_code','s.version','s.instrument_id','s.form_version')->orderBy('s.id')->orderBy('q.position')->get();
    $fp=fopen('php://temp','w+');fwrite($fp,"\xEF\xBB\xBF");
-   fputcsv($fp,['VARIABLE','GROUP','SURVEY_VERSION','QUESTION_CODE','QUESTION_LABEL','TYPE','REQUIRED','CHOICES_JSON','CONDITION_JSON','MISSING_CODE','SCALE_SOURCE','MIN_VALUE','MAX_VALUE'],',','"','');
-   foreach($qs as $q){$cells=['Q'.$q->survey_id.'_'.strtoupper($q->code),$q->group_code,$q->version,$q->code,$q->variable_label??$q->label,$q->type,(int)$q->required,$q->choices,$q->condition,$q->missing_code,$q->scale,$q->min_value,$q->max_value];$cells=array_map(fn($v)=>is_string($v)&&!is_numeric($v)&&preg_match('/^[\s]*[=+\-@]/u',$v)?"'".$v:$v,$cells);fputcsv($fp,$cells,',','"','');}
+   fputcsv($fp,['VARIABLE','GROUP','SURVEY_VERSION','QUESTION_CODE','QUESTION_LABEL','TYPE','REQUIRED','CHOICES_JSON','CONDITION_JSON','MISSING_CODE','SCALE_SOURCE','MIN_VALUE','MAX_VALUE','INSTRUMENT_ID','FORM_VERSION','SOURCE_ITEM_CODE','SOURCE_REF','CONSTRUCT_NAME'],',','"','');
+   foreach($qs as $q){$cells=['Q'.$q->survey_id.'_'.strtoupper($q->code),$q->group_code,$q->version,$q->code,$q->variable_label??$q->label,$q->type,(int)$q->required,$q->choices,$q->condition,$q->missing_code,$q->scale,$q->min_value,$q->max_value,$q->instrument_id,$q->form_version,$q->source_item_code,$q->source_ref,$q->construct_name];$cells=array_map(fn($v)=>is_string($v)&&!is_numeric($v)&&preg_match('/^[\s]*[=+\-@]/u',$v)?"'".$v:$v,$cells);fputcsv($fp,$cells,',','"','');}
    rewind($fp);$csv=stream_get_contents($fp);fclose($fp);
    Audit::log('data.codebook_export','questions',null,['rows'=>$qs->count()]);
    return response($csv,200,['Content-Type'=>'text/csv; charset=UTF-8','Content-Disposition'=>'attachment; filename="research_codebook.csv"','Cache-Control'=>'private, no-store','X-Content-Type-Options'=>'nosniff']);
@@ -32,9 +32,9 @@ class DataController extends Controller {
   $missing=DB::table('answers')->where(function($q){$q->whereNull('value')->orWhere('value','null');})->count();$invalid=DB::table('answers')->whereRaw('JSON_VALID(value) = 0')->count();return view('data.validation',compact('raw','distinct','valid','clean','missing','invalid'));
  }
  private function build(string $scope):array {
-  $qs=DB::table('questions')->orderBy('survey_id')->orderBy('position')->get();$headers=['RESEARCH_ID','SITE_CODE','WAVE_CODE','GROUP_CODE','SURVEY_VERSION','INFO_VERSION','QC_STATUS','COMPLETED_AT'];$codes=[];
+  $qs=DB::table('questions')->orderBy('survey_id')->orderBy('position')->get();$headers=['RESEARCH_ID','SITE_CODE','DEPARTMENT_CODE','WAVE_CODE','GROUP_CODE','INSTRUMENT_ID','FORM_VERSION','SURVEY_VERSION','INFO_VERSION','QC_STATUS','COMPLETED_AT'];$codes=[];
   foreach($qs as $q){$col='Q'.$q->survey_id.'_'.strtoupper($q->code);$headers[]=$col;$codes[$q->id]=$col;}
-  $query=DB::table('survey_sessions as ss')->join('participants as p','ss.participant_id','=','p.id')->join('sites as site','p.site_id','=','site.id')->join('waves as wave','p.wave_id','=','wave.id')->join('surveys as survey','ss.survey_id','=','survey.id')->leftJoin('consents as c', function ($join) {
+  $query=DB::table('survey_sessions as ss')->join('participants as p','ss.participant_id','=','p.id')->join('sites as site','p.site_id','=','site.id')->join('waves as wave','p.wave_id','=','wave.id')->join('surveys as survey','ss.survey_id','=','survey.id')->leftJoin('sample_links as link','p.sample_link_id','=','link.id')->leftJoin('departments as dep','link.department_id','=','dep.id')->leftJoin('consents as c', function ($join) {
     $join->on('c.id', '=', DB::raw(
         '(SELECT c2.id FROM consents c2
           WHERE c2.participant_id = p.id
@@ -43,12 +43,12 @@ class DataController extends Controller {
           ORDER BY c2.recorded_at DESC, c2.id DESC
           LIMIT 1)'
     ));
-})->select('ss.id','ss.completed_at','p.research_id','p.id as participant_id','p.group_code','site.code as site','wave.code as wave','survey.version as survey_version','c.information_version_id as info_version','p.state as participant_state')->where('ss.status','complete')->orderBy('ss.id');
+})->select('ss.id','ss.completed_at','p.research_id','p.id as participant_id','p.group_code','site.code as site','wave.code as wave','survey.version as survey_version','survey.instrument_id','survey.form_version','dep.code as department_code','c.information_version_id as info_version','p.state as participant_state')->where('ss.status','complete')->orderBy('ss.id');
   $rows=[];$applied=[];
   $rules= $scope==='clean' ? DB::table('cleaning_rules')->where('status','approved')->orderBy('id')->get()->groupBy('question_id') : collect();
-  foreach($query->get() as $s){$decision=DB::table('qc_decisions')->where('survey_session_id',$s->id)->orderByDesc('id')->value('decision')??'unreviewed';if($scope==='clean'&&($decision!=='valid'||in_array($s->participant_state,['withdrawal_requested','withdrawn'],true)||DB::table('participant_requests')->where('participant_id',$s->participant_id)->where('type','withdrawal')->where('status','!=','resolved')->exists()))continue;$a=DB::table('answers')->where('survey_session_id',$s->id)->pluck('value','question_id');$r=['RESEARCH_ID'=>$s->research_id,'SITE_CODE'=>$s->site,'WAVE_CODE'=>$s->wave,'GROUP_CODE'=>$s->group_code,'SURVEY_VERSION'=>$s->survey_version,'INFO_VERSION'=>$s->info_version,'QC_STATUS'=>$decision,'COMPLETED_AT'=>$s->completed_at];foreach($codes as $qid=>$col){
+  foreach($query->get() as $s){$decision=DB::table('qc_decisions')->where('survey_session_id',$s->id)->orderByDesc('id')->value('decision')??'unreviewed';if($scope==='clean'&&($decision!=='valid'||in_array($s->participant_state,['withdrawal_requested','withdrawn'],true)||DB::table('participant_requests')->where('participant_id',$s->participant_id)->where('type','withdrawal')->where('status','!=','resolved')->exists()))continue;$a=DB::table('answers')->where('survey_session_id',$s->id)->pluck('value','question_id');$missingByQuestion=DB::table('answers')->where('survey_session_id',$s->id)->whereNotNull('missing_code')->pluck('missing_code','question_id')->all();$r=['RESEARCH_ID'=>$s->research_id,'SITE_CODE'=>$s->site,'DEPARTMENT_CODE'=>$s->department_code,'INSTRUMENT_ID'=>$s->instrument_id,'FORM_VERSION'=>$s->form_version,'WAVE_CODE'=>$s->wave,'GROUP_CODE'=>$s->group_code,'SURVEY_VERSION'=>$s->survey_version,'INFO_VERSION'=>$s->info_version,'QC_STATUS'=>$decision,'COMPLETED_AT'=>$s->completed_at];foreach($codes as $qid=>$col){
     $val=$a->has($qid)?json_decode($a[$qid],true):null;
-    if($scope==='clean' && is_scalar($val))foreach($rules->get($qid,collect()) as $rule){
+    if($scope==='clean' && is_scalar($val) && !isset($missingByQuestion[$qid]))foreach($rules->get($qid,collect()) as $rule){
       if((string)$val===$rule->source_code){
         $before=(string)$val;$val=$rule->target_code;
         $applied[]=['survey_session_id'=>$s->id,'question_id'=>$qid,'cleaning_rule_id'=>$rule->id,'before_value'=>$before,'after_value'=>$val];break;

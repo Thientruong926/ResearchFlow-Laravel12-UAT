@@ -1,0 +1,11 @@
+﻿instrument_id,form_version,scale_code,scale_name,levels_text
+OBS2,DEMO-0.1,TH,Mức độ thực hiện,1 Hoàn toàn không thực hiện; 2 Ít thực hiện; 3 Thực hiện một phần; 4 Thực hiện đầy đủ; 5 Thực hiện rất đầy đủ
+OBS2,DEMO-0.1,DY,Mức độ đồng ý,1 Hoàn toàn không đồng ý; 2 Không đồng ý; 3 Trung lập; 4 Đồng ý; 5 Hoàn toàn đồng ý
+OBS2,DEMO-0.1,AH,Mức độ ảnh hưởng,1 Không ảnh hưởng; 2 Ảnh hưởng ít; 3 Ảnh hưởng vừa; 4 Ảnh hưởng nhiều; 5 Ảnh hưởng rất nhiều
+OBS2,DEMO-0.1,KK,Mức độ khó khăn,1 Không gặp khó khăn; 2 Khó khăn ít; 3 Khó khăn vừa; 4 Khó khăn nhiều; 5 Khó khăn rất nhiều
+OBS4,DEMO-0.1,DY,Mức đồng ý,1 Hoàn toàn không đồng ý; 2 Không đồng ý; 3 Trung lập; 4 Đồng ý; 5 Hoàn toàn đồng ý.
+OBS4,DEMO-0.1,TH,Mức triển khai,1 Chưa thực hiện; 2 Thực hiện ở mức rất hạn chế; 3 Thực hiện một phần; 4 Thực hiện phần lớn; 5 Thực hiện đầy đủ.
+OBS4,DEMO-0.1,TS,Tần suất,1 Không bao giờ; 2 Hiếm khi; 3 Thỉnh thoảng; 4 Thường xuyên; 5 Rất thường xuyên.
+OBS4,DEMO-0.1,AH,Ảnh hưởng cảm nhận,1 Không ảnh hưởng; 2 Ảnh hưởng ít; 3 Ảnh hưởng vừa; 4 Ảnh hưởng nhiều; 5 Ảnh hưởng rất nhiều.
+OBS4,DEMO-0.1,KK,Mức khó khăn,1 Không gặp khó khăn; 2 Khó khăn ít; 3 Khó khăn vừa; 4 Khó khăn nhiều; 5 Khó khăn rất nhiều.
+OBS4,DEMO-0.1,NC,Mức nhu cầu,1 Không có nhu cầu; 2 Nhu cầu thấp; 3 Nhu cầu vừa; 4 Nhu cầu cao; 5 Nhu cầu rất cao.

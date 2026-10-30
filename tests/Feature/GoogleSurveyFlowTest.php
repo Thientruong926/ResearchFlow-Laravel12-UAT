@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
-use Tests\TestCase;
+use Tests\GoogleTestCase as TestCase;
 
 class GoogleSurveyFlowTest extends TestCase
 {
@@ -17,6 +17,7 @@ class GoogleSurveyFlowTest extends TestCase
         $this->settingsFile = storage_path('framework/testing/research-settings-google-test.json');
         config([
             'research.settings_file' => $this->settingsFile,
+            'research.connections.metadata_directory' => storage_path('framework/testing/google-flow-health'),
             'research.google_sync_enabled' => true,
             'research.admin.email' => 'admin@example.test',
             'research.admin.password' => 'test-password-123',
@@ -30,6 +31,7 @@ class GoogleSurveyFlowTest extends TestCase
         if (isset($this->settingsFile) && is_file($this->settingsFile)) {
             unlink($this->settingsFile);
         }
+        \Illuminate\Support\Facades\File::deleteDirectory(storage_path('framework/testing/google-flow-health'));
 
         parent::tearDown();
     }
@@ -118,15 +120,18 @@ class GoogleSurveyFlowTest extends TestCase
         $this->withSession($session)
             ->get('/admin/responses?group=student')
             ->assertOk()
-            ->assertSee('Tốt')
+            ->assertSee('1 kết quả phù hợp')
+            ->assertSee('Xem chi tiết')
             ->assertDontSee('Khác');
 
-        $this->withSession($session)
+        $export = $this->withSession($session)
             ->get('/admin/responses/export?group=student')
             ->assertOk()
-            ->assertHeader('Content-Type', 'text/csv; charset=UTF-8')
-            ->assertSee('SITE_01')
-            ->assertDontSee('lecturer');
+            ->assertHeader('Content-Type', 'text/csv; charset=UTF-8');
+        $csv = $export->streamedContent();
+        $this->assertStringContainsString('SITE_01', $csv);
+        $this->assertStringContainsString('Tốt', $csv);
+        $this->assertStringNotContainsString('lecturer', $csv);
     }
 
     private function settings(): array

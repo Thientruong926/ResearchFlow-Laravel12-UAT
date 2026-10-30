@@ -7,7 +7,7 @@
     <article class="card stat"><span class="muted">Tổng số phản hồi</span><strong>{{ $summary['total'] }}</strong></article>
     <article class="card stat"><span class="muted">Tổng chỉ tiêu</span><strong>{{ $summary['target'] }}</strong></article>
     <article class="card stat"><span class="muted">Tỷ lệ phản hồi</span><strong>{{ $summary['response_rate'] === null ? '—' : $summary['response_rate'].'%' }}</strong></article>
-    <article class="card stat"><span class="muted">Đồng bộ lúc</span><strong style="font-size:20px">{{ $sync['synced_at']->format('H:i d/m/Y') }}</strong></article>
+    <article class="card stat"><span class="muted">Đọc đủ nguồn thành công lúc</span><strong style="font-size:20px">{{ $sync['synced_at']?->timezone('Asia/Ho_Chi_Minh')->format('H:i d/m/Y') ?? 'Chưa đọc đủ nguồn' }}</strong></article>
 </div>
 <div class="grid" style="margin-top:18px">
     @foreach(['by_date'=>'Phản hồi theo ngày','by_school'=>'Phân bố theo trường','by_group'=>'Phân bố theo nhóm'] as $key=>$title)

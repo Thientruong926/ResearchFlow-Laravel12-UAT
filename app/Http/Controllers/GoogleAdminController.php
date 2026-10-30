@@ -20,19 +20,22 @@ class GoogleAdminController extends Controller
         $configuration = $settings->all();
         $sync = $sheets->responses($configuration);
         $summary = $sheets->summarize($sync['records'], $configuration);
-        $connections = collect($configuration['assignments'])->map(function (array $assignment) use ($forms, $sync) {
-            $form = $forms->connectionStatus($assignment);
-            $sheetError = collect($sync['errors'])->first(
-                fn (string $error) => str_starts_with($error, ($assignment['id'] ?? '').':')
-            );
-            return $assignment + [
-                'form_status' => $form,
-                'sheet_status' => [
-                    'ok' => ! $sheetError && ! empty($assignment['sheet_csv_url']) && config('research.google_sync_enabled'),
-                    'message' => $sheetError ?: (empty($assignment['sheet_csv_url']) ? 'Chưa cấu hình' : (config('research.google_sync_enabled') ? 'Đã đồng bộ' : 'Đồng bộ đang tắt')),
-                ],
-            ];
-        });
+        $connections = [];
+        foreach (app(\App\Services\ConnectionSources::class)->all($configuration) as $source) {
+            $state = app(\App\Services\ConnectionHealthService::class)->snapshot($source);
+            foreach ($source['assignments'] as $assignment) {
+                $connections[] = $assignment + [
+                    'form_status' => $state['forms'][$assignment['id']] ?? ['ok' => false, 'message' => 'Chưa kiểm tra — xem trang Kết nối'],
+                    'sheet_status' => [
+                        'ok' => $state['status'] === 'ok' && ! $state['stale'],
+                        'message' => $state['stale'] ? 'Kết quả đã cũ — xem trang Kết nối' : match ($state['status']) {
+                            'ok' => 'Đọc Sheet thành công', 'disabled' => 'Tắt', 'unconfigured' => 'Chưa cấu hình',
+                            'error' => 'Lỗi đọc Sheet', default => 'Chưa kiểm tra — xem trang Kết nối',
+                        },
+                    ],
+                ];
+            }
+        }
 
         return view('admin.google_dashboard', compact('configuration', 'sync', 'summary', 'connections'));
     }
@@ -47,39 +50,33 @@ class GoogleAdminController extends Controller
         ]);
     }
 
-    public function updateResearch(Request $request, ResearchSettings $settings)
+    public function updateColumns(Request $request, ResearchSettings $settings)
     {
         $data = $request->validate([
-            'title' => ['required', 'string', 'max:300'],
-            'introduction' => ['required', 'string', 'max:5000'],
-            'contact_name' => ['required', 'string', 'max:200'],
-            'contact_email' => ['required', 'email', 'max:200'],
-            'consent' => ['required', 'string', 'max:5000'],
+            'revision' => ['required', 'string', 'size:64'],
             'timestamp_column' => ['required', 'string', 'max:200'],
             'school_column' => ['required', 'string', 'max:200'],
             'group_column' => ['required', 'string', 'max:200'],
         ]);
 
-        $settings->updateResearch(
-            collect($data)->only(['title', 'introduction', 'contact_name', 'contact_email', 'consent'])->all(),
+        $settings->updateColumns(
             [
                 'timestamp' => $data['timestamp_column'],
                 'school' => $data['school_column'],
                 'group' => $data['group_column'],
-            ]
+            ], $data['revision'], (string) $request->session()->get('admin_email', 'admin')
         );
-        Log::info('Research settings updated', ['admin' => $request->session()->get('admin_email')]);
-
-        return back()->with('ok', 'Đã lưu thông tin nghiên cứu và tên cột Google Sheets.');
+        return back()->with('ok', 'Đã lưu tên cột Google Sheets.');
     }
 
     public function updateSchools(Request $request, ResearchSettings $settings)
     {
-        $data = $request->validate(['schools' => ['required', 'string', 'max:20000']]);
+        $data = $request->validate(['schools' => ['required', 'string', 'max:20000'], 'revision' => ['required','string','size:64']]);
 
         try {
-            $settings->updateSchools($data['schools']);
+            $settings->updateSchools($data['schools'], $data['revision'], (string) $request->session()->get('admin_email', 'admin'));
         } catch (RuntimeException $exception) {
+            if ($exception instanceof \App\Exceptions\SettingsStorageException || $exception instanceof \Symfony\Component\HttpKernel\Exception\ConflictHttpException) throw $exception;
             return back()->withInput()->withErrors(['schools' => $exception->getMessage()]);
         }
 
@@ -90,6 +87,7 @@ class GoogleAdminController extends Controller
     public function upsertAssignment(Request $request, ResearchSettings $settings)
     {
         $data = $request->validate([
+            'revision' => ['required','string','size:64'],
             'school' => ['required', Rule::in(array_column($settings->schools(), 'code'))],
             'group' => ['required', Rule::in(array_keys(config('research.groups')))],
             'form_id' => ['required', 'string', 'max:500'],
@@ -125,76 +123,18 @@ class GoogleAdminController extends Controller
                 'digital' => $data['entry_digital'],
                 'note' => $data['entry_note'],
             ],
-        ]);
+        ], $data['revision'], (string) $request->session()->get('admin_email', 'admin'));
 
         Log::info('Google assignment updated', ['school' => $data['school'], 'group' => $data['group']]);
         return back()->with('ok', 'Đã gán Google Form và Google Sheet cho trường/nhóm.');
     }
 
-    public function removeAssignment(string $id, ResearchSettings $settings)
+    public function removeAssignment(string $id, Request $request, ResearchSettings $settings)
     {
-        $settings->removeAssignment($id);
+        $data = $request->validate(['revision'=>['required','string','size:64']]);
+        $settings->removeAssignment($id, $data['revision'], (string) $request->session()->get('admin_email', 'admin'));
         Log::info('Google assignment removed', ['assignment' => $id]);
         return back()->with('ok', 'Đã xóa cấu hình gán phiếu.');
     }
 
-    public function responses(Request $request, ResearchSettings $settings, GoogleSheetsService $sheets)
-    {
-        $configuration = $settings->all();
-        $sync = $sheets->responses($configuration);
-        $filters = [
-            'q' => trim((string) $request->query('q')),
-            'school' => trim((string) $request->query('school')),
-            'group' => trim((string) $request->query('group')),
-            'date' => trim((string) $request->query('date')),
-        ];
-        $records = $sheets->filter($sync['records'], $configuration, $filters);
-        $headers = $this->headers($records);
-
-        return view('admin.google_responses', compact('configuration', 'sync', 'filters', 'records', 'headers'));
-    }
-
-    public function export(Request $request, ResearchSettings $settings, GoogleSheetsService $sheets)
-    {
-        $configuration = $settings->all();
-        $sync = $sheets->responses($configuration);
-        $filters = [
-            'q' => trim((string) $request->query('q')),
-            'school' => trim((string) $request->query('school')),
-            'group' => trim((string) $request->query('group')),
-            'date' => trim((string) $request->query('date')),
-        ];
-        $records = $sheets->filter($sync['records'], $configuration, $filters);
-        $headers = $this->headers($records);
-
-        $stream = fopen('php://temp', 'w+');
-        fwrite($stream, "\xEF\xBB\xBF");
-        fputcsv($stream, $headers);
-        foreach ($records as $record) {
-            fputcsv($stream, array_map(fn (string $header) => $record[$header] ?? '', $headers));
-        }
-        rewind($stream);
-        $csv = stream_get_contents($stream);
-        fclose($stream);
-
-        Log::info('Google Sheet responses exported', ['rows' => count($records)]);
-        return response($csv, 200, [
-            'Content-Type' => 'text/csv; charset=UTF-8',
-            'Content-Disposition' => 'attachment; filename="google_survey_responses_'.now()->format('Ymd_His').'.csv"',
-            'Cache-Control' => 'private, no-store',
-        ]);
-    }
-
-    private function headers(array $records): array
-    {
-        $headers = [];
-        foreach ($records as $record) {
-            foreach (array_keys($record) as $header) {
-                if (! str_starts_with($header, '_') && ! in_array($header, $headers, true)) {
-                    $headers[] = $header;
-                }
-            }
-        }
-        return $headers;
-    }
 }

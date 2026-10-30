@@ -37,6 +37,8 @@
         <textarea id="note" name="note" maxlength="1000" placeholder="Không nhập thông tin nhận dạng cá nhân">{{ old('note') }}</textarea>
     </section>
     <section class="card">
+        @include('partials.research_consent')
+        @include('partials.research_contact')
         <label class="choice"><input type="checkbox" name="consent" value="1" required> Tôi đã đọc thông tin nghiên cứu và đồng ý gửi câu trả lời đến Google Forms. <span class="required">*</span></label>
         <div class="actions"><a class="btn secondary" href="{{ route('home') }}">Quay lại</a><button>Gửi câu trả lời</button></div>
         <p id="draft-status" class="small muted">Bản nháp được lưu cục bộ trên trình duyệt.</p>
