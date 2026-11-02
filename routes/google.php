@@ -27,6 +27,7 @@ Route::middleware('admin.session')->prefix('admin')->group(function () {
     Route::post('/settings/columns', [GoogleAdminController::class, 'updateColumns'])->middleware('throttle:20,1')->name('admin.settings.columns');
     Route::post('/settings/schools', [GoogleAdminController::class, 'updateSchools'])->middleware('throttle:20,1')->name('admin.settings.schools');
     Route::post('/settings/assignments', [GoogleAdminController::class, 'upsertAssignment'])->middleware('throttle:20,1')->name('admin.settings.assignments');
+    Route::post('/settings/assignments/{id}/sync', [GoogleAdminController::class, 'syncAssignment'])->middleware('throttle:10,1')->name('admin.settings.assignments.sync');
     Route::post('/settings/assignments/{id}/delete', [GoogleAdminController::class, 'removeAssignment'])->middleware('throttle:20,1')->name('admin.settings.assignments.delete');
     Route::get('/responses', [\App\Http\Controllers\AdminResponseController::class, 'index'])->name('admin.responses');
     Route::get('/responses/export', [\App\Http\Controllers\AdminResponseController::class, 'export'])->middleware('throttle:12,1')->name('admin.responses.export');

@@ -50,6 +50,8 @@ class GoogleSurveyController extends Controller
             'school' => $school,
             'group' => $group,
             'groupName' => config('research.groups')[$group],
+            'assignment' => $assignment,
+            'questions' => array_values($assignment['questions'] ?? []),
         ]);
     }
 
@@ -58,6 +60,14 @@ class GoogleSurveyController extends Controller
         ResearchSettings $settings,
         GoogleFormsService $forms
     ) {
+        $school = (string) $request->input('school');
+        $group = (string) $request->input('group');
+        $assignment = $settings->assignment($school, $group);
+
+        if ($assignment && ! empty($assignment['questions'])) {
+            return $this->submitImported($request, $settings, $forms, $assignment);
+        }
+
         $data = $request->validate([
             'school' => ['required', Rule::in(array_column($settings->schools(), 'code'))],
             'group' => ['required', Rule::in(array_keys(config('research.groups')))],
@@ -89,11 +99,65 @@ class GoogleSurveyController extends Controller
             return back()->withInput($request->only(['school', 'group']))->withErrors(['submit' => $exception->getMessage()]);
         }
 
+        $request->session()->flash('completed_draft_key', 'researchflow-draft-'.$data['school'].'-'.$data['group']);
         return redirect()->route('survey.thanks');
     }
 
-    public function thanks()
+    public function thanks(Request $request)
     {
-        return view('survey.thanks');
+        return view('survey.thanks', [
+            'completedDraftKey' => (string) $request->session()->get('completed_draft_key', ''),
+        ]);
+    }
+
+    private function submitImported(
+        Request $request,
+        ResearchSettings $settings,
+        GoogleFormsService $forms,
+        array $assignment
+    ) {
+        $rules = [
+            'school' => ['required', Rule::in(array_column($settings->schools(), 'code'))],
+            'group' => ['required', Rule::in(array_keys(config('research.groups')))],
+            'consent' => ['accepted'],
+            'answer' => ['nullable', 'array'],
+        ];
+
+        foreach ($assignment['questions'] as $question) {
+            $id = (string) $question['id'];
+            $key = 'answer.'.$id;
+            $required = (bool) ($question['required'] ?? false);
+            $options = array_column($question['options'] ?? [], 'value');
+
+            $rules[$key] = match ($question['type']) {
+                'checkbox' => [$required ? 'required' : 'nullable', 'array', 'max:20'],
+                'radio', 'dropdown', 'scale' => [$required ? 'required' : 'nullable', 'string', Rule::in($options)],
+                'paragraph' => [$required ? 'required' : 'nullable', 'string', 'max:5000'],
+                default => [$required ? 'required' : 'nullable', 'string', 'max:1000'],
+            };
+
+            if ($question['type'] === 'checkbox') {
+                $rules[$key.'.*'] = ['string', Rule::in($options)];
+            }
+        }
+
+        $data = $request->validate($rules, [
+            'consent.accepted' => 'Bạn cần xác nhận đồng ý trước khi gửi khảo sát.',
+            'answer.*.required' => 'Vui lòng trả lời đầy đủ các câu hỏi bắt buộc.',
+        ]);
+
+        try {
+            $forms->submitImported(
+                $assignment,
+                $data['school'],
+                $data['group'],
+                $data['answer'] ?? []
+            );
+        } catch (RuntimeException $exception) {
+            return back()->withErrors(['submit' => $exception->getMessage()]);
+        }
+
+        $request->session()->flash('completed_draft_key', 'researchflow-draft-'.$data['school'].'-'.$data['group']);
+        return redirect()->route('survey.thanks');
     }
 }

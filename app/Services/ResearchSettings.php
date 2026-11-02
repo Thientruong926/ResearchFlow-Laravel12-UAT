@@ -37,6 +37,11 @@ class ResearchSettings
         );
     }
 
+    public function assignmentById(string $id): ?array
+    {
+        return collect($this->assignments())->firstWhere('id', $id);
+    }
+
     public function school(string $code): ?array
     {
         return collect($this->schools())->firstWhere('code', $code);
@@ -108,18 +113,66 @@ class ResearchSettings
     {
         $data['id'] = $data['school'].'-'.$data['group'];
         $data['active'] = (bool) ($data['active'] ?? false);
-        $data['entries'] = Arr::only($data['entries'], [
+        $data['entries'] = array_filter(Arr::only($data['entries'], [
             'school', 'group', 'use', 'level', 'total', 'digital', 'note',
-        ]);
+        ]), fn ($value) => $value !== null && $value !== '');
 
         $this->store->update($revision, function ($settings) use ($data) {
         if (! in_array($data['school'], array_column($settings['schools'], 'code'), true)) throw new RuntimeException('Trường không còn trong cấu hình.');
+        $existing = collect($settings['assignments'])->firstWhere('id', $data['id']);
+        $next = is_array($existing) ? array_replace($existing, $data) : $data;
+        if (is_array($existing) && ($existing['form_id'] ?? '') !== $data['form_id']) {
+            unset($next['questions'], $next['form_title'], $next['form_description'], $next['form_sync']);
+        }
         $settings['assignments'] = array_values(array_filter(
             $settings['assignments'],
             fn (array $assignment) => ($assignment['id'] ?? '') !== $data['id']
         ));
-        $settings['assignments'][] = $data;
+        $settings['assignments'][] = $next;
         return $settings;
+        }, $actor);
+    }
+
+    public function syncAssignmentQuestions(string $id, array $import, string $revision, string $actor = 'admin'): void
+    {
+        $this->store->update($revision, function ($settings) use ($id, $import) {
+            $found = false;
+            foreach ($settings['assignments'] as &$assignment) {
+                if (($assignment['id'] ?? '') !== $id) {
+                    continue;
+                }
+
+                $systemEntryIds = array_filter([
+                    (string) ($assignment['entries']['school'] ?? ''),
+                    (string) ($assignment['entries']['group'] ?? ''),
+                ]);
+                $questions = array_values(array_filter(
+                    $import['questions'],
+                    fn (array $question) => ! in_array((string) ($question['entry_id'] ?? ''), $systemEntryIds, true)
+                ));
+                if ($questions === []) {
+                    throw new RuntimeException('Sau khi bỏ hai trường hệ thống, Google Form không còn câu hỏi khảo sát để hiển thị.');
+                }
+
+                $assignment['questions'] = $questions;
+                $assignment['form_title'] = $import['title'];
+                $assignment['form_description'] = $import['description'];
+                $assignment['form_sync'] = [
+                    'source' => $import['source'],
+                    'synced_at' => $import['synced_at'],
+                    'warnings' => $import['warnings'],
+                    'question_count' => count($questions),
+                ];
+                $found = true;
+                break;
+            }
+            unset($assignment);
+
+            if (! $found) {
+                throw new RuntimeException('Không tìm thấy cấu hình phiếu cần đồng bộ.');
+            }
+
+            return $settings;
         }, $actor);
     }
 

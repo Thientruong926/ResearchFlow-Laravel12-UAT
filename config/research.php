@@ -2,6 +2,7 @@
 
 return [
     'google_sync_enabled' => (bool) env('GOOGLE_SYNC_ENABLED', false),
+    'google_forms_access_token' => env('GOOGLE_FORMS_ACCESS_TOKEN', ''),
     'admin' => [
         'email' => env('ADMIN_EMAIL', 'admin@example.test'),
         'password' => env('ADMIN_PASSWORD', ''),

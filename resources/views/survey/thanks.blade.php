@@ -7,4 +7,7 @@
     <p class="muted">Câu trả lời đã được gửi đến Google Forms. Website ResearchFlow không lưu bản sao trong database.</p>
     <a class="btn" href="{{ route('home') }}">Trở về trang giới thiệu</a>
 </section>
+@if(!empty($completedDraftKey))
+<script>try{localStorage.removeItem(@json($completedDraftKey));}catch(e){}</script>
+@endif
 @endsection

@@ -18,6 +18,7 @@ ResearchFlow là ứng dụng Laravel 12 cung cấp giao diện khảo sát trê
 - Đăng nhập bằng tài khoản trong `.env`.
 - Cài đặt thông tin nghiên cứu, đồng thuận và liên hệ.
 - Cấu hình trường, chỉ tiêu và gán Google Form/Sheet theo trường – nhóm.
+- Đồng bộ tiêu đề, nội dung, kiểu câu hỏi, lựa chọn và trạng thái bắt buộc từ Google Forms lên giao diện website.
 - Xem trạng thái kết nối, tổng phản hồi, phản hồi theo ngày, trường, nhóm và tỷ lệ so với chỉ tiêu.
 - Xem chi tiết, tìm kiếm, lọc và xuất CSV từ Google Sheets.
 
@@ -57,6 +58,7 @@ APP_URL=http://127.0.0.1:8000
 ADMIN_EMAIL=admin@example.com
 ADMIN_PASSWORD=mat-khau-rieng-tu-it-nhat-12-ky-tu
 GOOGLE_SYNC_ENABLED=false
+GOOGLE_FORMS_ACCESS_TOKEN=
 SESSION_DRIVER=file
 CACHE_STORE=file
 ```
@@ -73,13 +75,15 @@ php artisan serve --host=127.0.0.1 --port=8000
 
 ## Kết nối Google Forms và Google Sheets
 
-1. Tạo Google Form có các trường: mã trường, nhóm, có sử dụng công cụ số, mức độ, tổng số buổi, số buổi dùng công cụ số và ghi chú.
-2. Trong Form, chọn **Nhận đường liên kết điền sẵn**. Điền thử và lấy các mã `entry.123456789` trong URL; chỉ nhập phần số vào website.
+1. Tạo Google Form với hai câu trả lời ngắn đầu tiên là **Mã trường** và **Nhóm đối tượng**, sau đó thêm bộ câu hỏi nghiên cứu.
+2. Trong Form, chọn **Nhận đường liên kết điền sẵn**. Điền thử hai trường hệ thống và lấy hai mã `entry.123456789`; chỉ nhập phần số vào website.
 3. Ở tab **Câu trả lời**, liên kết Form với Google Sheet.
 4. Cấp quyền xem bằng liên kết hoặc xuất bản Sheet, rồi sao chép URL Sheet.
 5. Đăng nhập website, vào **Cài đặt**, khai báo trường và gán Form/Sheet cho từng trường – nhóm.
-6. Kiểm tra Form ID, bảy entry ID, URL Sheet rồi đánh dấu **Đang hoạt động**.
-7. Sau khi nội dung và thông báo chuyển dữ liệu được duyệt, đổi `GOOGLE_SYNC_ENABLED=true` và chạy:
+6. Trong bảng **Các phiếu đã gán**, bấm **Đồng bộ câu hỏi**. Hệ thống nhập câu trả lời ngắn, đoạn văn, một lựa chọn, danh sách thả xuống, nhiều lựa chọn và thang đo. Hai trường hệ thống được ẩn vì website tự gửi mã trường/nhóm đã chọn.
+7. Form mở bằng liên kết không cần OAuth. Nếu Form riêng tư, tạo OAuth token có scope `forms.body.readonly`, đặt vào `GOOGLE_FORMS_ACCESS_TOKEN`, rồi xóa cache cấu hình.
+8. Kiểm tra số câu hỏi đã đồng bộ, URL Sheet và trạng thái **Đang hoạt động**.
+9. Sau khi nội dung và thông báo chuyển dữ liệu được duyệt, đổi `GOOGLE_SYNC_ENABLED=true` và chạy:
 
 ```powershell
 php artisan optimize:clear
@@ -101,7 +105,8 @@ Quy trình demo: trình bày cài đặt; cho xem kết nối Form/Sheet; gửi 
 
 ## Giới hạn
 
-- Project không tự tạo Google Form và không dùng Google OAuth. Người quản lý phải tạo Form/Sheet và khai báo entry ID.
+- Project không tự tạo Google Form. Form công khai có thể đồng bộ trực tiếp; Form riêng tư cần OAuth access token và token có thể hết hạn.
+- Câu hỏi dạng lưới, tải tệp, ngày/giờ và lựa chọn “Khác” có trường nhập phụ chưa được dựng lại trên website; hệ thống hiển thị cảnh báo và bỏ qua khi đồng bộ.
 - Dashboard chỉ đọc được Sheet có quyền truy cập phù hợp.
-- Câu hỏi hiện tại là mẫu kỹ thuật; phải thay bằng bộ câu hỏi được duyệt trước khi thu thập thật.
+- Chỉ đồng bộ bộ câu hỏi đã được giảng viên/chủ nhiệm duyệt trước khi thu thập thật.
 - `php artisan serve` chỉ dùng để phát triển/demo cục bộ; triển khai thật cần HTTPS và quy trình bảo vệ dữ liệu.

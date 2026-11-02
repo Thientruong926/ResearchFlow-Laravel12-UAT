@@ -9,6 +9,47 @@
 <form method="POST" action="{{ route('survey.submit') }}" id="survey-form">@csrf
     <input type="hidden" name="school" value="{{ $school['code'] }}">
     <input type="hidden" name="group" value="{{ $group }}">
+    @if($questions !== [])
+    <section class="card">
+        <h2>{{ $assignment['form_title'] ?? 'Phiếu câu hỏi đã đồng bộ' }}</h2>
+        @if(!empty($assignment['form_description']))<p class="muted">{{ $assignment['form_description'] }}</p>@endif
+        <p class="small muted">Đã đồng bộ {{ count($questions) }} câu hỏi từ Google Forms lúc {{ isset($assignment['form_sync']['synced_at']) ? \Carbon\Carbon::parse($assignment['form_sync']['synced_at'])->timezone('Asia/Ho_Chi_Minh')->format('H:i d/m/Y') : 'không rõ' }}.</p>
+    </section>
+    @foreach($questions as $index => $question)
+    @php($field = 'answer['.$question['id'].']')
+    <section class="card question">
+        <label>{{ $index + 1 }}. {{ $question['title'] }} @if($question['required'] ?? false)<span class="required">*</span>@endif</label>
+        @if(!empty($question['description']))<p class="muted">{{ $question['description'] }}</p>@endif
+
+        @if(in_array($question['type'], ['radio','scale'], true))
+            @if($question['type'] === 'scale' && (!empty($question['low_label']) || !empty($question['high_label'])))
+                <div class="actions" style="justify-content:space-between"><span class="small muted">{{ $question['low_label'] ?? '' }}</span><span class="small muted">{{ $question['high_label'] ?? '' }}</span></div>
+            @endif
+            <div class="inline-choice">
+                @foreach($question['options'] as $option)
+                <label class="choice"><input type="radio" name="{{ $field }}" value="{{ $option['value'] }}" @checked(old('answer.'.$question['id']) === $option['value']) @required($question['required'] ?? false)>{{ $option['label'] }}</label>
+                @endforeach
+            </div>
+        @elseif($question['type'] === 'checkbox')
+            <div class="inline-choice">
+                @foreach($question['options'] as $option)
+                <label class="choice"><input type="checkbox" name="{{ $field }}[]" value="{{ $option['value'] }}" @checked(in_array($option['value'], old('answer.'.$question['id'], []), true))>{{ $option['label'] }}</label>
+                @endforeach
+            </div>
+        @elseif($question['type'] === 'dropdown')
+            <select name="{{ $field }}" @required($question['required'] ?? false)>
+                <option value="">-- Chọn câu trả lời --</option>
+                @foreach($question['options'] as $option)<option value="{{ $option['value'] }}" @selected(old('answer.'.$question['id']) === $option['value'])>{{ $option['label'] }}</option>@endforeach
+            </select>
+        @elseif($question['type'] === 'paragraph')
+            <textarea name="{{ $field }}" maxlength="5000" @required($question['required'] ?? false)>{{ old('answer.'.$question['id']) }}</textarea>
+        @else
+            <input name="{{ $field }}" value="{{ old('answer.'.$question['id']) }}" maxlength="1000" @required($question['required'] ?? false)>
+        @endif
+    </section>
+    @endforeach
+    @else
+    <div class="notice"><strong>Chế độ tương thích:</strong> Phiếu này chưa đồng bộ câu hỏi từ Google Forms nên đang hiển thị bộ câu hỏi mẫu cũ.</div>
     <section class="card question">
         <label>1. Trong tình huống khảo sát, bạn đã sử dụng công cụ số trong hoạt động dạy hoặc học chưa? <span class="required">*</span></label>
         <div class="inline-choice">
@@ -36,6 +77,7 @@
         <label for="note">5. Góp ý thêm</label>
         <textarea id="note" name="note" maxlength="1000" placeholder="Không nhập thông tin nhận dạng cá nhân">{{ old('note') }}</textarea>
     </section>
+    @endif
     <section class="card">
         @include('partials.research_consent')
         @include('partials.research_contact')
@@ -48,10 +90,10 @@
 const form=document.getElementById('survey-form');
 const draftKey='researchflow-draft-{{ $school['code'] }}-{{ $group }}';
 function branch(){const use=form.querySelector('[name=use]:checked')?.value;document.querySelectorAll('[data-when-use]').forEach(section=>{const show=use===section.dataset.whenUse;section.hidden=!show;section.querySelectorAll('input,select,textarea').forEach(input=>input.disabled=!show);});}
-function saveDraft(){const data={};new FormData(form).forEach((value,key)=>{if(!key.startsWith('_')&&key!=='consent')data[key]=value});localStorage.setItem(draftKey,JSON.stringify(data));document.getElementById('draft-status').textContent='Đã lưu bản nháp trên thiết bị lúc '+new Date().toLocaleTimeString('vi-VN');}
-try{const draft=JSON.parse(localStorage.getItem(draftKey)||'{}');Object.entries(draft).forEach(([name,value])=>{const nodes=form.querySelectorAll(`[name="${name}"]`);nodes.forEach(node=>{if(node.type==='radio')node.checked=node.value===value;else node.value=value;});});}catch(e){}
+function saveDraft(){const data={};new FormData(form).forEach((value,key)=>{if(key.startsWith('_')||key==='consent')return;if(Object.hasOwn(data,key))data[key]=Array.isArray(data[key])?[...data[key],value]:[data[key],value];else data[key]=value;});localStorage.setItem(draftKey,JSON.stringify(data));document.getElementById('draft-status').textContent='Đã lưu bản nháp trên thiết bị lúc '+new Date().toLocaleTimeString('vi-VN');}
+try{const draft=JSON.parse(localStorage.getItem(draftKey)||'{}');Object.entries(draft).forEach(([name,value])=>{const nodes=form.querySelectorAll(`[name="${name}"]`);nodes.forEach(node=>{if(node.type==='radio'||node.type==='checkbox')node.checked=Array.isArray(value)?value.includes(node.value):node.value===value;else node.value=value;});});}catch(e){}
 form.querySelectorAll('input,select,textarea').forEach(input=>input.addEventListener('input',()=>{branch();saveDraft();}));
-form.addEventListener('submit',event=>{const total=Number(form.total.value),digital=Number(form.digital?.value);if(!form.total.value||total<0||total>100){event.preventDefault();alert('Tổng số buổi phải từ 0 đến 100.');return;}if(!form.digital?.disabled&&(!form.digital.value||digital<0||digital>total)){event.preventDefault();alert('Số buổi dùng công cụ số phải từ 0 đến tổng số buổi.');return;}localStorage.removeItem(draftKey);});
+form.addEventListener('submit',event=>{if(form.total){const total=Number(form.total.value),digital=Number(form.digital?.value);if(!form.total.value||total<0||total>100){event.preventDefault();alert('Tổng số buổi phải từ 0 đến 100.');return;}if(!form.digital?.disabled&&(!form.digital.value||digital<0||digital>total)){event.preventDefault();alert('Số buổi dùng công cụ số phải từ 0 đến tổng số buổi.');}}});
 branch();
 </script>
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\GoogleFormsService;
+use App\Services\GoogleFormQuestionImporter;
 use App\Services\GoogleSheetsService;
 use App\Services\ResearchSettings;
 use Illuminate\Http\Request;
@@ -95,11 +96,11 @@ class GoogleAdminController extends Controller
             'active' => ['nullable', 'boolean'],
             'entry_school' => ['required', 'digits_between:1,30'],
             'entry_group' => ['required', 'digits_between:1,30'],
-            'entry_use' => ['required', 'digits_between:1,30'],
-            'entry_level' => ['required', 'digits_between:1,30'],
-            'entry_total' => ['required', 'digits_between:1,30'],
-            'entry_digital' => ['required', 'digits_between:1,30'],
-            'entry_note' => ['required', 'digits_between:1,30'],
+            'entry_use' => ['nullable', 'digits_between:1,30'],
+            'entry_level' => ['nullable', 'digits_between:1,30'],
+            'entry_total' => ['nullable', 'digits_between:1,30'],
+            'entry_digital' => ['nullable', 'digits_between:1,30'],
+            'entry_note' => ['nullable', 'digits_between:1,30'],
         ]);
 
         if (strtolower((string) parse_url($data['sheet_csv_url'], PHP_URL_HOST)) !== 'docs.google.com') {
@@ -117,16 +118,52 @@ class GoogleAdminController extends Controller
             'entries' => [
                 'school' => $data['entry_school'],
                 'group' => $data['entry_group'],
-                'use' => $data['entry_use'],
-                'level' => $data['entry_level'],
-                'total' => $data['entry_total'],
-                'digital' => $data['entry_digital'],
-                'note' => $data['entry_note'],
+                'use' => $data['entry_use'] ?? null,
+                'level' => $data['entry_level'] ?? null,
+                'total' => $data['entry_total'] ?? null,
+                'digital' => $data['entry_digital'] ?? null,
+                'note' => $data['entry_note'] ?? null,
             ],
         ], $data['revision'], (string) $request->session()->get('admin_email', 'admin'));
 
         Log::info('Google assignment updated', ['school' => $data['school'], 'group' => $data['group']]);
         return back()->with('ok', 'Đã gán Google Form và Google Sheet cho trường/nhóm.');
+    }
+
+    public function syncAssignment(
+        string $id,
+        Request $request,
+        ResearchSettings $settings,
+        GoogleFormQuestionImporter $importer
+    ) {
+        $data = $request->validate(['revision' => ['required', 'string', 'size:64']]);
+        $assignment = $settings->assignmentById($id);
+        abort_unless($assignment, 404);
+
+        try {
+            $import = $importer->import((string) ($assignment['form_id'] ?? ''));
+            $settings->syncAssignmentQuestions(
+                $id,
+                $import,
+                $data['revision'],
+                (string) $request->session()->get('admin_email', 'admin')
+            );
+        } catch (RuntimeException $exception) {
+            return back()->withErrors(['sync' => $exception->getMessage()]);
+        }
+
+        Log::info('Google Form questions synchronized', [
+            'assignment' => $id,
+            'questions' => count($settings->assignmentById($id)['questions'] ?? []),
+            'source' => $import['source'],
+        ]);
+
+        $message = 'Đã đồng bộ '.count($settings->assignmentById($id)['questions'] ?? []).' câu hỏi hiển thị từ Google Form.';
+        if ($import['warnings'] !== []) {
+            $message .= ' Có '.count($import['warnings']).' cảnh báo cần xem.';
+        }
+
+        return back()->with('ok', $message);
     }
 
     public function removeAssignment(string $id, Request $request, ResearchSettings $settings)

@@ -105,6 +105,16 @@ class SettingsFileStore
             foreach (['id','school','group'] as $field) if (! is_string($assignment[$field] ?? null)) throw new SettingsStorageException('Thông tin gán phiếu không hợp lệ.');
             foreach (['form_id','sheet_csv_url'] as $field) if (isset($assignment[$field]) && ! is_string($assignment[$field])) throw new SettingsStorageException('Thông tin nguồn không hợp lệ.');
             if (isset($assignment['entries']) && ! is_array($assignment['entries'])) throw new SettingsStorageException('Mapping Form không hợp lệ.');
+            if (isset($assignment['questions'])) {
+                if (! is_array($assignment['questions']) || ! array_is_list($assignment['questions']) || count($assignment['questions']) > 100) throw new SettingsStorageException('Danh sách câu hỏi đồng bộ không hợp lệ.');
+                foreach ($assignment['questions'] as $question) {
+                    if (! is_array($question)) throw new SettingsStorageException('Câu hỏi đồng bộ không hợp lệ.');
+                    foreach (['id','entry_id','title','type'] as $field) if (! is_string($question[$field] ?? null)) throw new SettingsStorageException('Câu hỏi đồng bộ thiếu thông tin.');
+                    if (! in_array($question['type'], ['short_text','paragraph','radio','dropdown','checkbox','scale'], true)) throw new SettingsStorageException('Kiểu câu hỏi đồng bộ không được hỗ trợ.');
+                    if (isset($question['options']) && ! is_array($question['options'])) throw new SettingsStorageException('Lựa chọn câu hỏi không hợp lệ.');
+                }
+            }
+            if (isset($assignment['form_sync']) && ! is_array($assignment['form_sync'])) throw new SettingsStorageException('Trạng thái đồng bộ Form không hợp lệ.');
         }
         $settings['_version'] ??= 0;
         $settings['_audit'] ??= [];
@@ -151,11 +161,15 @@ class SettingsFileStore
         $safe['source_defaults'] = array_intersect_key($safe['source_defaults'] ?? [], array_flip(['timestamp_format','timezone']));
         $safe['schools'] = array_map(fn ($s) => ['code'=>$s['code'], 'name'=>$s['name'], 'targets'=>array_intersect_key($s['targets'] ?? [], config('research.groups'))], $safe['schools']);
         $safe['assignments'] = array_map(function ($a) {
-            $a = array_intersect_key($a, array_flip(['id','school','group','active','form_id','sheet_csv_url','entries']));
+            $a = array_intersect_key($a, array_flip(['id','school','group','active','form_id','sheet_csv_url','entries','questions','form_title','form_description','form_sync']));
             $form = $a['form_id'] ?? '';
             $a['form_id'] = preg_match('~/d/e/([A-Za-z0-9_-]+)~', $form, $match) ? $match[1] : preg_replace('/[^A-Za-z0-9_-]/', '', $form);
             try { $a['sheet_csv_url'] = app(GoogleSheetsService::class)->csvUrl($a['sheet_csv_url'] ?? ''); } catch (\InvalidArgumentException) { $a['sheet_csv_url'] = ''; }
             $a['entries'] = array_intersect_key($a['entries'] ?? [], array_flip(['school','group','use','level','total','digital','note']));
+            if (isset($a['questions'])) {
+                $a['questions'] = array_map(fn ($q) => array_intersect_key($q, array_flip(['id','entry_id','title','description','type','required','options','low_label','high_label'])), array_slice($a['questions'], 0, 100));
+            }
+            if (isset($a['form_sync'])) $a['form_sync'] = array_intersect_key($a['form_sync'], array_flip(['source','synced_at','warnings','question_count']));
             return $a;
         }, $safe['assignments']);
         return $safe;

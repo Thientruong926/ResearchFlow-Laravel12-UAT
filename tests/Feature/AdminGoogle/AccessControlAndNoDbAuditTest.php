@@ -64,6 +64,7 @@ class AccessControlAndNoDbAuditTest extends GoogleTestCase
             ['POST', '/admin/settings/columns'],
             ['POST', '/admin/settings/schools'],
             ['POST', '/admin/settings/assignments'],
+            ['POST', '/admin/settings/assignments/test/sync'],
             ['POST', '/admin/settings/assignments/test/delete'],
         ];
 
@@ -96,6 +97,7 @@ class AccessControlAndNoDbAuditTest extends GoogleTestCase
             '/admin/settings/columns',
             '/admin/settings/schools',
             '/admin/settings/assignments',
+            '/admin/settings/assignments/hcmue-student/sync',
             '/admin/settings/assignments/hcmue-student/delete',
         ];
 
