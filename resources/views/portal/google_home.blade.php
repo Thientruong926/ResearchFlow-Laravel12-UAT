@@ -3,13 +3,18 @@
 @section('content')
 @include('partials.research_intro')
 
-<div class="grid" style="margin-top:18px">
-    <article class="card"><h2>1. Chọn đúng đối tượng</h2><p class="muted">Chọn trường và nhóm tham gia để hệ thống mở đúng phiếu khảo sát.</p></article>
-    <article class="card"><h2>2. Trả lời thuận tiện</h2><p class="muted">Giao diện tối ưu cho máy tính và điện thoại, có kiểm tra câu bắt buộc.</p></article>
-    <article class="card"><h2>3. Gửi an toàn</h2><p class="muted">Câu trả lời được chuyển trực tiếp đến Google Forms, website không lưu database.</p></article>
+<div class="actions" style="margin:18px 0 2px">
+    <a class="btn" href="#start">Bắt đầu khảo sát <span aria-hidden="true">→</span></a>
+    <span class="small muted">Thời gian thực hiện: khoảng 5–10 phút</span>
 </div>
 
-<section class="card" style="max-width:760px;margin:24px auto">
+<div class="grid" style="margin-top:18px">
+    <article class="card"><span class="pill">BƯỚC 01</span><h2>Chọn đúng đối tượng</h2><p class="muted">Chọn trường và nhóm tham gia để hệ thống mở đúng phiếu khảo sát.</p></article>
+    <article class="card"><span class="pill">BƯỚC 02</span><h2>Trả lời thuận tiện</h2><p class="muted">Giao diện tối ưu cho máy tính và điện thoại, có kiểm tra câu bắt buộc.</p></article>
+    <article class="card"><span class="pill">BƯỚC 03</span><h2>Gửi an toàn</h2><p class="muted">Câu trả lời được chuyển trực tiếp đến Google Forms, website không lưu database.</p></article>
+</div>
+
+<section class="card" id="start" style="max-width:760px;margin:24px auto">
     <h2>Bắt đầu khảo sát</h2>
     @include('partials.research_consent')
     @unless($syncEnabled)<div class="notice"><strong>Chế độ cấu hình:</strong> Đồng bộ Google đang tắt. Người quản lý cần hoàn tất kết nối trước khi nhận phản hồi.</div>@endunless

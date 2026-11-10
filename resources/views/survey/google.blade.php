@@ -1,10 +1,11 @@
 @extends('google_layout')
 @section('title', 'Phiếu khảo sát')
 @section('content')
-<div class="card">
+<div class="card survey-heading">
     <span class="pill">{{ $school['name'] }} · {{ $groupName }}</span>
     <h1>{{ $research['title'] }}</h1>
     <p class="muted">Các câu có dấu <span class="required">*</span> là bắt buộc. Bản nháp chỉ được giữ trên thiết bị này và chưa gửi ra ngoài cho đến khi bạn bấm Gửi câu trả lời.</p>
+    <div class="notice small">Bạn đang điền phiếu dành cho <strong>{{ $groupName }}</strong> tại <strong>{{ $school['name'] }}</strong>. Nếu cần đổi lựa chọn, hãy quay lại trang trước.</div>
 </div>
 <form method="POST" action="{{ route('survey.submit') }}" id="survey-form">@csrf
     <input type="hidden" name="school" value="{{ $school['code'] }}">
@@ -82,7 +83,7 @@
         @include('partials.research_consent')
         @include('partials.research_contact')
         <label class="choice"><input type="checkbox" name="consent" value="1" required> Tôi đã đọc thông tin nghiên cứu và đồng ý gửi câu trả lời đến Google Forms. <span class="required">*</span></label>
-        <div class="actions"><a class="btn secondary" href="{{ route('home') }}">Quay lại</a><button>Gửi câu trả lời</button></div>
+        <div class="actions"><a class="btn secondary" href="{{ route('home') }}">Quay lại</a><button>Gửi câu trả lời <span aria-hidden="true">→</span></button></div>
         <p id="draft-status" class="small muted">Bản nháp được lưu cục bộ trên trình duyệt.</p>
     </section>
 </form>
@@ -90,10 +91,11 @@
 const form=document.getElementById('survey-form');
 const draftKey='researchflow-draft-{{ $school['code'] }}-{{ $group }}';
 function branch(){const use=form.querySelector('[name=use]:checked')?.value;document.querySelectorAll('[data-when-use]').forEach(section=>{const show=use===section.dataset.whenUse;section.hidden=!show;section.querySelectorAll('input,select,textarea').forEach(input=>input.disabled=!show);});}
+function updateAnswerStates(){form.querySelectorAll('.question').forEach(question=>{const controls=[...question.querySelectorAll('input:not([type=hidden]),select,textarea')];const answered=controls.some(control=>control.type==='checkbox'||control.type==='radio'?control.checked:control.value.trim()!=='');question.classList.toggle('is-answered',answered);question.querySelectorAll('.choice').forEach(choice=>{const input=choice.querySelector('input');choice.classList.toggle('is-selected',Boolean(input?.checked));});});form.querySelectorAll('.choice').forEach(choice=>{const input=choice.querySelector('input');choice.classList.toggle('is-selected',Boolean(input?.checked));});}
 function saveDraft(){const data={};new FormData(form).forEach((value,key)=>{if(key.startsWith('_')||key==='consent')return;if(Object.hasOwn(data,key))data[key]=Array.isArray(data[key])?[...data[key],value]:[data[key],value];else data[key]=value;});localStorage.setItem(draftKey,JSON.stringify(data));document.getElementById('draft-status').textContent='Đã lưu bản nháp trên thiết bị lúc '+new Date().toLocaleTimeString('vi-VN');}
 try{const draft=JSON.parse(localStorage.getItem(draftKey)||'{}');Object.entries(draft).forEach(([name,value])=>{const nodes=form.querySelectorAll(`[name="${name}"]`);nodes.forEach(node=>{if(node.type==='radio'||node.type==='checkbox')node.checked=Array.isArray(value)?value.includes(node.value):node.value===value;else node.value=value;});});}catch(e){}
-form.querySelectorAll('input,select,textarea').forEach(input=>input.addEventListener('input',()=>{branch();saveDraft();}));
+form.querySelectorAll('input,select,textarea').forEach(input=>{input.addEventListener('input',()=>{branch();updateAnswerStates();saveDraft();});input.addEventListener('change',()=>{branch();updateAnswerStates();});});
 form.addEventListener('submit',event=>{if(form.total){const total=Number(form.total.value),digital=Number(form.digital?.value);if(!form.total.value||total<0||total>100){event.preventDefault();alert('Tổng số buổi phải từ 0 đến 100.');return;}if(!form.digital?.disabled&&(!form.digital.value||digital<0||digital>total)){event.preventDefault();alert('Số buổi dùng công cụ số phải từ 0 đến tổng số buổi.');}}});
-branch();
+branch();updateAnswerStates();
 </script>
 @endsection
